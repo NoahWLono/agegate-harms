@@ -1,5 +1,9 @@
 # AgeGate Harms
 
+**Created and maintained by [Noah Weinberger](https://github.com/NoahWLono).**
+
+AgeGate Harms is an independent research project examining the privacy, accessibility, civil-liberties, and implementation costs of age-assurance mandates.
+
 **A transparent policy simulator for measuring what age-assurance systems prevent, whom they burden, what data they create, and how much they cost.**
 
 Age restrictions are often debated as though enforcement were a binary switch: verify age, block minors, problem solved. Real systems are not binary. Every age-assurance method has error rates, compliance costs, privacy consequences, accessibility failures, circumvention pathways, and distributional effects.
