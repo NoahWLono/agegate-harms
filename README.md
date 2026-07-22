@@ -322,4 +322,6 @@ The project is provided for research and educational purposes. It is not legal, 
 
 ## License
 
-Choose and add an open-source license before inviting public reuse. The MIT License is a simple permissive option for the code. Data and written research may warrant separate licensing or citation terms.
+The software in this repository is released under the [MIT License](LICENSE).
+
+Research reports, written analysis, datasets, and third-party materials may be subject to separate attribution or licensing requirements where indicated.

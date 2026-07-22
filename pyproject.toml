@@ -3,6 +3,7 @@ name = "agegate-harms"
 version = "0.1.0"
 description = "Transparent scenario simulator for age-verification policy trade-offs"
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 dependencies = [
   "matplotlib>=3.9",
