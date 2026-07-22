@@ -1,0 +1,2 @@
+[console_scripts]
+agegate-run = agegate_harms.cli:main

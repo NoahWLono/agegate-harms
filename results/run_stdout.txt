@@ -1,0 +1,10 @@
+Wrote results to /mnt/data/agegate-harms/results
+                                method  minor_purchases_prevented  adult_adverse_outcomes  identity_records_created  total_annual_cost
+                       No verification                        0.0                 0.00000                     0.000             0.0000
+                     Self-declared age                       86.4               128.20164                     0.000          2624.4645
+                 Visual age estimation                     1210.0              1657.12050                     0.000         13480.1550
+Government photo ID, visual inspection                     3083.2              2539.32000                     0.000         27934.7440
+                       Document upload                     3104.0              4496.52000                 21325.000         73861.2500
+                 Facial age estimation                     2448.0              3074.94600                  3511.860         47023.7200
+        Reusable third-party age token                     2995.2              2070.72600                  4467.508        102680.5048
+ In-person enrolment for online access                     3546.0              7102.93500                  9060.200        195301.0000

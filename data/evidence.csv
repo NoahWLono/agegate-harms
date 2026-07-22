@@ -1,0 +1,2 @@
+variable,method,jurisdiction,scenario,value,lower,upper,source,source_type,status,notes
+ALL,ALL,Hypothetical,Energy-drink retail,,,,,illustrative_assumption,UNSOURCED,"Version 0.1 uses deliberately illustrative values. Replace each method parameter with evidence before policy use."

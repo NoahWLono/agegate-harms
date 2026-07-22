@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/agegate_harms/__init__.py
+src/agegate_harms/cli.py
+src/agegate_harms/model.py
+src/agegate_harms/reporting.py
+src/agegate_harms.egg-info/PKG-INFO
+src/agegate_harms.egg-info/SOURCES.txt
+src/agegate_harms.egg-info/dependency_links.txt
+src/agegate_harms.egg-info/entry_points.txt
+src/agegate_harms.egg-info/requires.txt
+src/agegate_harms.egg-info/top_level.txt
+tests/test_model.py

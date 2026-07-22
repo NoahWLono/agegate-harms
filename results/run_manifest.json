@@ -1,0 +1,52 @@
+{
+  "experiment": "AgeGate Harms",
+  "version": "0.1.0",
+  "generated_utc": "2026-07-22T20:16:00.432431+00:00",
+  "status": "core experiment completed",
+  "evidence_status": "all numerical inputs are illustrative assumptions",
+  "scenario": "hypothetical Quebec-style energy-drink retail age-check scenario",
+  "methods_compared": 8,
+  "command": "PYTHONPATH=src python -m agegate_harms.cli --simulations 50000 --seed 20260722",
+  "simulations": 50000,
+  "seed": 20260722,
+  "runtime": {
+    "elapsed": "00:05.94",
+    "max_rss_kb": 309708
+  },
+  "tests": {
+    "collected": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "packaging_smoke_test": {
+    "editable_install_without_dependency_resolution": "passed",
+    "console_entrypoint": "passed with 1000 simulations and sensitivity output"
+  },
+  "python": "3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]",
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyyaml": "6.0.3",
+    "matplotlib": "3.10.8",
+    "pytest": "9.0.2"
+  },
+  "ui_validation": {
+    "static_dashboard": "generated as a self-contained HTML file",
+    "streamlit_app": "source included but not launched in this VM because the internal Python package mirror did not supply Streamlit; the core experiment does not require Streamlit"
+  },
+  "sha256": {
+    "pyproject.toml": "4dbf3965336e2a3b81d268b6a76fdf26b99f65fcafcc0177e99971580b79301c",
+    "data/assumptions.yaml": "610eaf9f7273024bfd1e573f2fedeb977bb23d00d813598372eacca1e0af1d1d",
+    "src/agegate_harms/model.py": "421ac93c578041aa806a09810c205ffed58b85d464ce9e3e1e088c46a00dafae",
+    "src/agegate_harms/reporting.py": "02b85ba3ae1746f81e05474c94fd0831d6a1e1e6517b8598e83aa2ee8bbd53fe",
+    "src/agegate_harms/cli.py": "0e528c3bbd40551b45dd8ff625c7723d25026620dcc2cafe775efdccbedfa4eb",
+    "results/deterministic_results.csv": "5a3d93ae4a128e45aae9fe0addf24f49a5e8e07aa6425f678d66ff3e5437f5c2",
+    "results/monte_carlo_summary.csv": "9acc2551009309ab13f79bfa2a858c8d4655e3e7703901b52a17e873abe6dcb6",
+    "results/sensitivity.csv": "3cf4e177378aa4ff06436e2a4b0d6698b6db9a38cdc972a7b016416fbe7387f7",
+    "results/REPORT.md": "ed55957235e788ab30eee438ef74e2e282eda8fe5b084c4499061c6e892a5fa5",
+    "results/dashboard.html": "2c15b9348d1efbd8a0e655f81ba8e7cac85ca22c482d8b4e337e5c1f756898aa",
+    "results/tradeoff.png": "6e77bba0004b815875238e38a35a65878fc6a936fe90723ab89d125b0fb93774",
+    "results/privacy_footprint.png": "9d7c2cff8390050e5d0723ffd63e7e1d18b861188a2d93b98b459b0537fbe4da"
+  }
+}
