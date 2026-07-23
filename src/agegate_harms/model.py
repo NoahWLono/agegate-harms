@@ -1,11 +1,15 @@
-"""Core deterministic and Monte Carlo model for AgeGate Harms.
+"""Transparent deterministic and Monte Carlo model for AgeGate Harms v0.2.
 
-The model is deliberately transparent. It is a scenario calculator, not a causal
-forecast. Every output follows directly from the supplied assumptions.
+The model is a scenario calculator, not a causal forecast. Every result follows
+from auditable assumptions in a YAML scenario file. Numerical assumptions may
+carry evidence identifiers, but an evidence identifier does not make an input
+empirical. The evidence registry records whether the relationship is direct,
+contextual, legal, guidance, a gap, or an analyst assumption.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -13,16 +17,31 @@ import numpy as np
 import pandas as pd
 import yaml
 
+SPEC_METADATA_FIELDS = {
+    "value",
+    "low",
+    "mode",
+    "high",
+    "evidence_ids",
+    "status",
+    "unit",
+    "notes",
+}
+
 RATE_FIELDS = {
     "purchase_attempt_rate",
     "minor_share",
     "higher_friction_adult_share",
     "minor_detection_rate",
     "minor_circumvention_rate",
+    "minor_substitution_rate",
     "adult_false_rejection_rate",
     "adult_abandonment_rate",
     "verification_check_rate",
+    "identity_proofing_rate",
     "annual_breach_probability",
+    "catastrophic_breach_probability",
+    "catastrophic_exposure_fraction",
     "centralized_record_fraction",
 }
 
@@ -30,33 +49,81 @@ NONNEGATIVE_FIELDS = {
     "population",
     "higher_friction_false_rejection_multiplier",
     "higher_friction_abandonment_multiplier",
-    "records_per_check",
-    "third_party_disclosures_per_check",
-    "biometric_scans_per_check",
+    "records_per_identity_proof",
+    "third_party_disclosures_per_identity_proof",
+    "biometric_scans_per_identity_proof",
+    "transient_images_per_identity_proof",
+    "age_assertions_per_check",
+    "record_retention_years",
     "variable_cost_per_check",
+    "variable_cost_per_identity_proof",
+    "fixed_annual_cost",
+}
+
+REQUIRED_SCENARIO_FIELDS = {
+    "population",
+    "purchase_attempt_rate",
+    "minor_share",
+    "higher_friction_adult_share",
+}
+
+REQUIRED_METHOD_FIELDS = {
+    "label",
+    "minor_detection_rate",
+    "minor_circumvention_rate",
+    "minor_substitution_rate",
+    "adult_false_rejection_rate",
+    "adult_abandonment_rate",
+    "higher_friction_false_rejection_multiplier",
+    "higher_friction_abandonment_multiplier",
+    "verification_check_rate",
+    "identity_proofing_rate",
+    "records_per_identity_proof",
+    "annual_breach_probability",
+    "catastrophic_breach_probability",
+    "catastrophic_exposure_fraction",
+    "third_party_disclosures_per_identity_proof",
+    "biometric_scans_per_identity_proof",
+    "transient_images_per_identity_proof",
+    "age_assertions_per_check",
+    "centralized_record_fraction",
+    "record_retention_years",
+    "variable_cost_per_check",
+    "variable_cost_per_identity_proof",
     "fixed_annual_cost",
 }
 
 KEY_METRICS = [
     "minor_purchases_prevented",
+    "minor_substitution_events",
+    "minor_consumption_prevented",
     "minor_purchases_permitted",
     "adult_false_rejections",
     "adult_abandonments",
     "adult_adverse_outcomes",
     "higher_friction_adult_adverse_outcomes",
     "adult_adverse_outcomes_per_minor_purchase_prevented",
+    "adult_adverse_outcomes_per_minor_consumption_prevented",
     "adult_checks_per_minor_purchase_prevented",
+    "identity_proofing_events",
     "identity_records_created",
+    "centralized_identity_records",
+    "centralized_records_at_risk",
+    "expected_routine_records_exposed",
+    "expected_catastrophic_records_exposed",
     "expected_records_exposed",
+    "transient_identity_images",
     "biometric_scans",
+    "credential_assertions",
     "third_party_disclosures",
     "total_annual_cost",
     "cost_per_minor_purchase_prevented",
+    "cost_per_minor_consumption_prevented",
 ]
 
 
 def load_config(path: str | Path) -> dict[str, Any]:
-    """Load and minimally validate a YAML configuration."""
+    """Load and validate a YAML scenario configuration."""
     config_path = Path(path)
     with config_path.open("r", encoding="utf-8") as handle:
         config = yaml.safe_load(handle)
@@ -64,20 +131,25 @@ def load_config(path: str | Path) -> dict[str, Any]:
         raise ValueError("Configuration root must be a mapping.")
     if "scenario" not in config or "methods" not in config:
         raise ValueError("Configuration must contain 'scenario' and 'methods'.")
-    if not config["methods"]:
+    if not isinstance(config["methods"], Mapping) or not config["methods"]:
         raise ValueError("At least one verification method is required.")
     _validate_config(config)
     return config
 
 
-def _bounds(spec: Any) -> tuple[float, float, float]:
+def spec_bounds(spec: Any) -> tuple[float, float, float]:
+    """Return low, mode, and high for scalar or evidence-annotated specs."""
     if isinstance(spec, Mapping):
-        missing = {"low", "mode", "high"} - set(spec)
-        if missing:
-            raise ValueError(f"Distribution is missing fields: {sorted(missing)}")
-        low = float(spec["low"])
-        mode = float(spec["mode"])
-        high = float(spec["high"])
+        if "value" in spec:
+            value = float(spec["value"])
+            low = mode = high = value
+        else:
+            missing = {"low", "mode", "high"} - set(spec)
+            if missing:
+                raise ValueError(f"Distribution is missing fields: {sorted(missing)}")
+            low = float(spec["low"])
+            mode = float(spec["mode"])
+            high = float(spec["high"])
     else:
         low = mode = high = float(spec)
     if not low <= mode <= high:
@@ -85,8 +157,20 @@ def _bounds(spec: Any) -> tuple[float, float, float]:
     return low, mode, high
 
 
+def spec_evidence_ids(spec: Any) -> list[str]:
+    """Return evidence identifiers attached to a numeric specification."""
+    if not isinstance(spec, Mapping):
+        return []
+    raw = spec.get("evidence_ids", [])
+    if isinstance(raw, str):
+        return [raw]
+    if raw is None:
+        return []
+    return [str(item) for item in raw]
+
+
 def _validate_field(name: str, spec: Any) -> None:
-    low, _, high = _bounds(spec)
+    low, _, high = spec_bounds(spec)
     if name in RATE_FIELDS and (low < 0 or high > 1):
         raise ValueError(f"Rate '{name}' must remain between 0 and 1.")
     if name in NONNEGATIVE_FIELDS and low < 0:
@@ -94,51 +178,31 @@ def _validate_field(name: str, spec: Any) -> None:
 
 
 def _validate_config(config: Mapping[str, Any]) -> None:
-    required_scenario = {
-        "population",
-        "purchase_attempt_rate",
-        "minor_share",
-        "higher_friction_adult_share",
-    }
-    required_method = {
-        "label",
-        "minor_detection_rate",
-        "minor_circumvention_rate",
-        "adult_false_rejection_rate",
-        "adult_abandonment_rate",
-        "higher_friction_false_rejection_multiplier",
-        "higher_friction_abandonment_multiplier",
-        "verification_check_rate",
-        "records_per_check",
-        "annual_breach_probability",
-        "third_party_disclosures_per_check",
-        "biometric_scans_per_check",
-        "centralized_record_fraction",
-        "variable_cost_per_check",
-        "fixed_annual_cost",
-    }
     scenario = config["scenario"]
-    missing_scenario = required_scenario - set(scenario)
+    if not isinstance(scenario, Mapping):
+        raise ValueError("Scenario must be a mapping.")
+    missing_scenario = REQUIRED_SCENARIO_FIELDS - set(scenario)
     if missing_scenario:
         raise ValueError(f"Scenario is missing: {sorted(missing_scenario)}")
-    for name, spec in scenario.items():
-        if name in required_scenario:
-            _validate_field(name, spec)
+    for name in REQUIRED_SCENARIO_FIELDS:
+        _validate_field(name, scenario[name])
+
     for method_name, method in config["methods"].items():
-        missing_method = required_method - set(method)
+        if not isinstance(method, Mapping):
+            raise ValueError(f"Method '{method_name}' must be a mapping.")
+        missing_method = REQUIRED_METHOD_FIELDS - set(method)
         if missing_method:
             raise ValueError(f"Method '{method_name}' is missing: {sorted(missing_method)}")
-        for name, spec in method.items():
-            if name in required_method - {"label"}:
-                _validate_field(name, spec)
+        for name in REQUIRED_METHOD_FIELDS - {"label"}:
+            _validate_field(name, method[name])
 
 
 def _mode(spec: Any) -> float:
-    return _bounds(spec)[1]
+    return spec_bounds(spec)[1]
 
 
 def _sample(spec: Any, simulations: int, rng: np.random.Generator) -> np.ndarray:
-    low, mode, high = _bounds(spec)
+    low, mode, high = spec_bounds(spec)
     if low == high:
         return np.full(simulations, low, dtype=float)
     return rng.triangular(low, mode, high, size=simulations)
@@ -148,7 +212,7 @@ def _mode_values(mapping: Mapping[str, Any]) -> dict[str, float]:
     return {
         key: _mode(value)
         for key, value in mapping.items()
-        if key not in {"label", "description"}
+        if key not in {"label", "description", "policy_family", "channel"}
     }
 
 
@@ -158,8 +222,39 @@ def _sample_values(
     return {
         key: _sample(value, simulations, rng)
         for key, value in mapping.items()
-        if key not in {"label", "description"}
+        if key not in {"label", "description", "policy_family", "channel"}
     }
+
+
+def iter_numeric_parameters(config: Mapping[str, Any]) -> Iterator[dict[str, Any]]:
+    """Yield every modeled parameter and its evidence metadata."""
+    for name, spec in config["scenario"].items():
+        if name in REQUIRED_SCENARIO_FIELDS:
+            low, mode, high = spec_bounds(spec)
+            yield {
+                "scope": "scenario",
+                "method_id": "ALL",
+                "parameter": name,
+                "parameter_key": f"scenario.{name}",
+                "low": low,
+                "mode": mode,
+                "high": high,
+                "evidence_ids": spec_evidence_ids(spec),
+            }
+    for method_id, method in config["methods"].items():
+        for name, spec in method.items():
+            if name in REQUIRED_METHOD_FIELDS - {"label"}:
+                low, mode, high = spec_bounds(spec)
+                yield {
+                    "scope": "method",
+                    "method_id": method_id,
+                    "parameter": name,
+                    "parameter_key": f"methods.{method_id}.{name}",
+                    "low": low,
+                    "mode": mode,
+                    "high": high,
+                    "evidence_ids": spec_evidence_ids(spec),
+                }
 
 
 def calculate_outcomes(
@@ -180,9 +275,12 @@ def calculate_outcomes(
 
     minor_detection = np.asarray(method["minor_detection_rate"], dtype=float)
     minor_circumvention = np.asarray(method["minor_circumvention_rate"], dtype=float)
+    minor_substitution_rate = np.asarray(method["minor_substitution_rate"], dtype=float)
     initially_blocked_minors = minor_attempts * minor_detection
     circumvented_minor_attempts = initially_blocked_minors * minor_circumvention
     minor_purchases_prevented = initially_blocked_minors - circumvented_minor_attempts
+    minor_substitution_events = minor_purchases_prevented * minor_substitution_rate
+    minor_consumption_prevented = minor_purchases_prevented - minor_substitution_events
     minor_purchases_permitted = minor_attempts - minor_purchases_prevented
 
     hf_adult_attempts = adult_attempts * higher_friction_share
@@ -205,9 +303,7 @@ def calculate_outcomes(
     hf_false_rejection_rate = np.minimum(
         1.0,
         base_false_rejection
-        * np.asarray(
-            method["higher_friction_false_rejection_multiplier"], dtype=float
-        ),
+        * np.asarray(method["higher_friction_false_rejection_multiplier"], dtype=float),
     )
     other_false_rejections = other_processed * base_false_rejection
     hf_false_rejections = hf_processed * hf_false_rejection_rate
@@ -220,38 +316,68 @@ def calculate_outcomes(
     higher_friction_adult_adverse_outcomes = hf_abandonments + hf_false_rejections
 
     check_rate = np.asarray(method["verification_check_rate"], dtype=float)
-    adult_verification_checks = (other_processed + hf_processed) * check_rate
+    adult_verification_checks = adult_attempts * check_rate
     minor_verification_checks = minor_attempts * check_rate
     total_verification_checks = adult_verification_checks + minor_verification_checks
 
-    records_per_check = np.asarray(method["records_per_check"], dtype=float)
-    identity_records_created = total_verification_checks * records_per_check
+    identity_proofing_rate = np.asarray(method["identity_proofing_rate"], dtype=float)
+    identity_proofing_events = total_verification_checks * identity_proofing_rate
+    records_per_proof = np.asarray(method["records_per_identity_proof"], dtype=float)
+    identity_records_created = identity_proofing_events * records_per_proof
     centralized_identity_records = identity_records_created * np.asarray(
         method["centralized_record_fraction"], dtype=float
     )
-    expected_records_exposed = identity_records_created * np.asarray(
+    centralized_records_at_risk = centralized_identity_records * np.asarray(
+        method["record_retention_years"], dtype=float
+    )
+
+    expected_routine_records_exposed = centralized_records_at_risk * np.asarray(
         method["annual_breach_probability"], dtype=float
     )
-    third_party_disclosures = total_verification_checks * np.asarray(
-        method["third_party_disclosures_per_check"], dtype=float
+    expected_catastrophic_records_exposed = (
+        centralized_records_at_risk
+        * np.asarray(method["catastrophic_breach_probability"], dtype=float)
+        * np.asarray(method["catastrophic_exposure_fraction"], dtype=float)
     )
-    biometric_scans = total_verification_checks * np.asarray(
-        method["biometric_scans_per_check"], dtype=float
+    expected_records_exposed = (
+        expected_routine_records_exposed + expected_catastrophic_records_exposed
+    )
+
+    proof_disclosures = identity_proofing_events * np.asarray(
+        method["third_party_disclosures_per_identity_proof"], dtype=float
+    )
+    credential_assertions = total_verification_checks * np.asarray(
+        method["age_assertions_per_check"], dtype=float
+    )
+    third_party_disclosures = proof_disclosures + credential_assertions
+    biometric_scans = identity_proofing_events * np.asarray(
+        method["biometric_scans_per_identity_proof"], dtype=float
+    )
+    transient_identity_images = identity_proofing_events * np.asarray(
+        method["transient_images_per_identity_proof"], dtype=float
     )
 
     total_annual_cost = (
         total_verification_checks
         * np.asarray(method["variable_cost_per_check"], dtype=float)
+        + identity_proofing_events
+        * np.asarray(method["variable_cost_per_identity_proof"], dtype=float)
         + np.asarray(method["fixed_annual_cost"], dtype=float)
     )
 
-    denominator = np.asarray(minor_purchases_prevented, dtype=float)
-    has_prevention = denominator > 0
-
-    def ratio(numerator: float | np.ndarray) -> np.ndarray:
+    def ratio(
+        numerator: float | np.ndarray, denominator: float | np.ndarray
+    ) -> np.ndarray:
         numerator_array = np.asarray(numerator, dtype=float)
-        output = np.full(np.broadcast(numerator_array, denominator).shape, np.nan)
-        np.divide(numerator_array, denominator, out=output, where=has_prevention)
+        denominator_array = np.asarray(denominator, dtype=float)
+        shape = np.broadcast(numerator_array, denominator_array).shape
+        output = np.full(shape, np.nan)
+        np.divide(
+            numerator_array,
+            denominator_array,
+            out=output,
+            where=denominator_array > 0,
+        )
         return output
 
     return {
@@ -260,6 +386,8 @@ def calculate_outcomes(
         "minor_purchase_attempts": minor_attempts,
         "adult_purchase_attempts": adult_attempts,
         "minor_purchases_prevented": minor_purchases_prevented,
+        "minor_substitution_events": minor_substitution_events,
+        "minor_consumption_prevented": minor_consumption_prevented,
         "minor_purchases_permitted": minor_purchases_permitted,
         "adult_correctly_permitted": adult_correctly_permitted,
         "adult_false_rejections": adult_false_rejections,
@@ -267,26 +395,46 @@ def calculate_outcomes(
         "adult_adverse_outcomes": adult_adverse_outcomes,
         "higher_friction_adult_adverse_outcomes": higher_friction_adult_adverse_outcomes,
         "adult_verification_checks": adult_verification_checks,
+        "minor_verification_checks": minor_verification_checks,
         "total_verification_checks": total_verification_checks,
+        "identity_proofing_events": identity_proofing_events,
         "identity_records_created": identity_records_created,
         "centralized_identity_records": centralized_identity_records,
+        "centralized_records_at_risk": centralized_records_at_risk,
+        "expected_routine_records_exposed": expected_routine_records_exposed,
+        "expected_catastrophic_records_exposed": expected_catastrophic_records_exposed,
         "expected_records_exposed": expected_records_exposed,
         "third_party_disclosures": third_party_disclosures,
+        "credential_assertions": credential_assertions,
         "biometric_scans": biometric_scans,
+        "transient_identity_images": transient_identity_images,
         "total_annual_cost": total_annual_cost,
         "adult_adverse_outcomes_per_minor_purchase_prevented": ratio(
-            adult_adverse_outcomes
+            adult_adverse_outcomes, minor_purchases_prevented
+        ),
+        "adult_adverse_outcomes_per_minor_consumption_prevented": ratio(
+            adult_adverse_outcomes, minor_consumption_prevented
         ),
         "adult_checks_per_minor_purchase_prevented": ratio(
-            adult_verification_checks
+            adult_verification_checks, minor_purchases_prevented
         ),
-        "records_per_minor_purchase_prevented": ratio(identity_records_created),
-        "cost_per_minor_purchase_prevented": ratio(total_annual_cost),
+        "records_per_minor_purchase_prevented": ratio(
+            identity_records_created, minor_purchases_prevented
+        ),
+        "records_per_minor_consumption_prevented": ratio(
+            identity_records_created, minor_consumption_prevented
+        ),
+        "cost_per_minor_purchase_prevented": ratio(
+            total_annual_cost, minor_purchases_prevented
+        ),
+        "cost_per_minor_consumption_prevented": ratio(
+            total_annual_cost, minor_consumption_prevented
+        ),
     }
 
 
 def deterministic_comparison(config: Mapping[str, Any]) -> pd.DataFrame:
-    """Run each method at the mode/default value of every assumption."""
+    """Run each method at modal values."""
     scenario = _mode_values(config["scenario"])
     rows: list[dict[str, Any]] = []
     for method_id, method_config in config["methods"].items():
@@ -296,6 +444,8 @@ def deterministic_comparison(config: Mapping[str, Any]) -> pd.DataFrame:
             "method_id": method_id,
             "method": method_config["label"],
             "description": method_config.get("description", ""),
+            "policy_family": method_config.get("policy_family", ""),
+            "channel": method_config.get("channel", ""),
         }
         row.update({key: float(np.asarray(value)) for key, value in outcomes.items()})
         rows.append(row)
@@ -305,11 +455,7 @@ def deterministic_comparison(config: Mapping[str, Any]) -> pd.DataFrame:
 def run_monte_carlo(
     config: Mapping[str, Any], simulations: int = 50_000, seed: int = 20260722
 ) -> dict[str, pd.DataFrame]:
-    """Run vectorized Monte Carlo simulations for all methods.
-
-    All methods share the same sampled scenario draws, which makes comparisons
-    less noisy. Method-specific assumptions are sampled independently.
-    """
+    """Run vectorized Monte Carlo simulations for all methods."""
     if simulations < 1:
         raise ValueError("simulations must be at least 1")
     rng = np.random.default_rng(seed)
@@ -331,19 +477,16 @@ def run_monte_carlo(
 
 
 def sensitivity_analysis(
-    simulations: Mapping[str, pd.DataFrame],
-    metrics: list[str] | None = None,
+    simulations: Mapping[str, pd.DataFrame], metrics: list[str] | None = None
 ) -> pd.DataFrame:
-    """Estimate monotonic input influence using Spearman rank correlation.
-
-    This is an exploratory global sensitivity diagnostic, not a causal effect.
-    Constant inputs are omitted because their correlation is undefined.
-    """
+    """Estimate monotonic input influence with Spearman rank correlation."""
     metrics = metrics or [
         "minor_purchases_prevented",
+        "minor_consumption_prevented",
         "adult_adverse_outcomes",
         "higher_friction_adult_adverse_outcomes",
         "identity_records_created",
+        "centralized_records_at_risk",
         "expected_records_exposed",
         "total_annual_cost",
     ]
@@ -365,6 +508,11 @@ def sensitivity_analysis(
             correlations.sort(key=lambda item: abs(item[1]), reverse=True)
             for rank, (column, correlation) in enumerate(correlations, start=1):
                 _, source, input_name = column.split("__", maxsplit=2)
+                parameter_key = (
+                    f"scenario.{input_name}"
+                    if source == "scenario"
+                    else f"methods.{method_id}.{input_name}"
+                )
                 rows.append(
                     {
                         "method_id": method_id,
@@ -373,6 +521,7 @@ def sensitivity_analysis(
                         "rank": rank,
                         "input_source": source,
                         "input": input_name,
+                        "parameter_key": parameter_key,
                         "spearman_correlation": correlation,
                         "absolute_correlation": abs(correlation),
                     }
@@ -381,10 +530,9 @@ def sensitivity_analysis(
 
 
 def summarize_simulations(
-    simulations: Mapping[str, pd.DataFrame],
-    metrics: list[str] | None = None,
+    simulations: Mapping[str, pd.DataFrame], metrics: list[str] | None = None
 ) -> pd.DataFrame:
-    """Summarize simulation outputs using 5th, 50th, and 95th percentiles."""
+    """Summarize simulation outputs with 5th, 50th, and 95th percentiles."""
     metrics = metrics or KEY_METRICS
     rows: list[dict[str, Any]] = []
     for method_id, frame in simulations.items():

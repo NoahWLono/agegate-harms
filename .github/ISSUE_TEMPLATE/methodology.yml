@@ -1,0 +1,27 @@
+name: Methodology or model issue
+about: Propose or challenge a calculation, outcome definition, or model structure
+title: "Methodology: "
+labels: [methodology]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or omitted mechanism
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Consequence for interpretation or outputs
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change, alternatives, and trade-offs
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence or test case

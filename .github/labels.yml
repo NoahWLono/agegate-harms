@@ -1,0 +1,27 @@
+- name: evidence
+  color: 1D76DB
+  description: Empirical, legal, guidance, assumption, or gap records
+- name: methodology
+  color: 5319E7
+  description: Outcome definitions, equations, uncertainty, and interpretation
+- name: model
+  color: 0052CC
+  description: Simulation implementation and architecture
+- name: legal
+  color: B60205
+  description: Statutes, regulations, official decisions, and dated legal status
+- name: accessibility
+  color: 0E8A16
+  description: Accessible workflows, disability, and accommodation
+- name: privacy
+  color: D93F0B
+  description: Data flows, retention, linkability, security, and surveillance
+- name: economics
+  color: FBCA04
+  description: Retailer, user, and implementation costs
+- name: distributional
+  color: C2E0C6
+  description: Unequal burdens and group-specific evidence
+- name: documentation
+  color: 0075CA
+  description: Research communication and bilingual documentation

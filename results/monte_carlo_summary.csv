@@ -1,113 +1,201 @@
 method_id,method,metric,p05,median,p95,mean
 no_verification,No verification,minor_purchases_prevented,0.0,0.0,0.0,0.0
+no_verification,No verification,minor_substitution_events,0.0,0.0,0.0,0.0
+no_verification,No verification,minor_consumption_prevented,0.0,0.0,0.0,0.0
 no_verification,No verification,minor_purchases_permitted,3183.2299858062056,4159.158903682599,5331.722298741813,4195.322738087025
 no_verification,No verification,adult_false_rejections,0.0,0.0,0.0,0.0
 no_verification,No verification,adult_abandonments,0.0,0.0,0.0,0.0
 no_verification,No verification,adult_adverse_outcomes,0.0,0.0,0.0,0.0
 no_verification,No verification,higher_friction_adult_adverse_outcomes,0.0,0.0,0.0,0.0
 no_verification,No verification,adult_adverse_outcomes_per_minor_purchase_prevented,,,,
+no_verification,No verification,adult_adverse_outcomes_per_minor_consumption_prevented,,,,
 no_verification,No verification,adult_checks_per_minor_purchase_prevented,,,,
+no_verification,No verification,identity_proofing_events,0.0,0.0,0.0,0.0
 no_verification,No verification,identity_records_created,0.0,0.0,0.0,0.0
+no_verification,No verification,centralized_identity_records,0.0,0.0,0.0,0.0
+no_verification,No verification,centralized_records_at_risk,0.0,0.0,0.0,0.0
+no_verification,No verification,expected_routine_records_exposed,0.0,0.0,0.0,0.0
+no_verification,No verification,expected_catastrophic_records_exposed,0.0,0.0,0.0,0.0
 no_verification,No verification,expected_records_exposed,0.0,0.0,0.0,0.0
+no_verification,No verification,transient_identity_images,0.0,0.0,0.0,0.0
 no_verification,No verification,biometric_scans,0.0,0.0,0.0,0.0
+no_verification,No verification,credential_assertions,0.0,0.0,0.0,0.0
 no_verification,No verification,third_party_disclosures,0.0,0.0,0.0,0.0
 no_verification,No verification,total_annual_cost,0.0,0.0,0.0,0.0
 no_verification,No verification,cost_per_minor_purchase_prevented,,,,
+no_verification,No verification,cost_per_minor_consumption_prevented,,,,
 self_declaration,Self-declared age,minor_purchases_prevented,38.28586542676391,86.45804746639152,162.67011372838888,91.5784898138408
+self_declaration,Self-declared age,minor_substitution_events,9.740201827119359,26.17723785822853,58.51196048823299,29.021205166332823
+self_declaration,Self-declared age,minor_consumption_prevented,25.062016940912258,58.35993160685331,114.56948539138747,62.55728464750798
 self_declaration,Self-declared age,minor_purchases_permitted,3111.641701870673,4066.9931501233077,5220.469403662659,4103.744248273183
-self_declaration,Self-declared age,adult_false_rejections,9.304008426141802,33.267720828546686,71.71398700309794,36.21969562025118
-self_declaration,Self-declared age,adult_abandonments,57.77646764703624,145.47194172582732,283.72638172488234,155.5391865879046
-self_declaration,Self-declared age,adult_adverse_outcomes,87.57695172771652,182.7100072164069,325.72586926499093,191.75888220815577
-self_declaration,Self-declared age,higher_friction_adult_adverse_outcomes,10.476983623596434,23.795063225919552,47.83864587283953,25.7880501975529
-self_declaration,Self-declared age,adult_adverse_outcomes_per_minor_purchase_prevented,0.833983542471281,2.1154721288739573,5.488837468981807,2.5075973672562255
-self_declaration,Self-declared age,adult_checks_per_minor_purchase_prevented,129.16108211391324,236.30886477054236,525.4994577859587,269.6220722187216
-self_declaration,Self-declared age,identity_records_created,31.430504198199998,359.50491613403983,974.0978983699855,414.09024376111415
-self_declaration,Self-declared age,expected_records_exposed,0.039296264587816654,0.5672139557449685,2.5041472147154344,0.8271767229483596
+self_declaration,Self-declared age,adult_false_rejections,9.500195350984567,33.153057759602675,71.96931182376676,36.12019923600796
+self_declaration,Self-declared age,adult_abandonments,57.56457459724485,145.6550784780129,282.6556745357327,155.3546550174453
+self_declaration,Self-declared age,adult_adverse_outcomes,87.34422516072684,181.82521527944527,324.3851892889191,191.47485425345332
+self_declaration,Self-declared age,higher_friction_adult_adverse_outcomes,10.42381805728694,23.755264581122383,47.892184936965144,25.755809860990965
+self_declaration,Self-declared age,adult_adverse_outcomes_per_minor_purchase_prevented,0.8349978683281717,2.1243286059068005,5.512986363496198,2.5032454022510993
+self_declaration,Self-declared age,adult_adverse_outcomes_per_minor_consumption_prevented,1.2060665324433715,3.125012071460708,8.340650714894995,3.733718491669158
+self_declaration,Self-declared age,adult_checks_per_minor_purchase_prevented,130.17205017398598,237.75962179438068,528.3386308332803,271.64769083430156
+self_declaration,Self-declared age,identity_proofing_events,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,identity_records_created,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,centralized_identity_records,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,centralized_records_at_risk,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,expected_routine_records_exposed,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,expected_catastrophic_records_exposed,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,expected_records_exposed,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,transient_identity_images,0.0,0.0,0.0,0.0
 self_declaration,Self-declared age,biometric_scans,0.0,0.0,0.0,0.0
+self_declaration,Self-declared age,credential_assertions,0.0,0.0,0.0,0.0
 self_declaration,Self-declared age,third_party_disclosures,0.0,0.0,0.0,0.0
-self_declaration,Self-declared age,total_annual_cost,1574.892997930871,3670.827957291378,6764.386856014867,3872.401674682182
-self_declaration,Self-declared age,cost_per_minor_purchase_prevented,14.896846759127172,42.57972003273926,117.61022145966778,51.364513276724296
-visual_estimation,Visual age estimation,minor_purchases_prevented,782.8273928777893,1235.8168645991273,1877.4731056738472,1269.4917823583776
-visual_estimation,Visual age estimation,minor_purchases_permitted,2118.54473117313,2890.8633218989876,3861.0541199407103,2925.830955728647
-visual_estimation,Visual age estimation,adult_false_rejections,748.8894006934611,1480.4508772418444,2449.3122171925743,1525.5468563443026
-visual_estimation,Visual age estimation,adult_abandonments,201.7295627806787,432.69116808920626,788.6764285962988,457.05772561263547
-visual_estimation,Visual age estimation,adult_adverse_outcomes,1133.2892223699314,1937.9313159574076,2983.641924979689,1982.6045819569383
-visual_estimation,Visual age estimation,higher_friction_adult_adverse_outcomes,169.10194307386243,322.6208570104865,575.6624048620488,341.45719829298673
-visual_estimation,Visual age estimation,adult_adverse_outcomes_per_minor_purchase_prevented,0.8488771615730649,1.5671622586075933,2.739361455063445,1.6500840092721243
-visual_estimation,Visual age estimation,adult_checks_per_minor_purchase_prevented,8.297148180724802,12.599823587759959,19.816700231457332,13.117622090002767
-visual_estimation,Visual age estimation,identity_records_created,0.0,0.0,0.0,0.0
-visual_estimation,Visual age estimation,expected_records_exposed,0.0,0.0,0.0,0.0
-visual_estimation,Visual age estimation,biometric_scans,0.0,0.0,0.0,0.0
-visual_estimation,Visual age estimation,third_party_disclosures,0.0,0.0,0.0,0.0
-visual_estimation,Visual age estimation,total_annual_cost,8692.50239765137,17765.92477112795,30889.384562576874,18601.82823446187
-visual_estimation,Visual age estimation,cost_per_minor_purchase_prevented,6.385640563324431,14.386026327309008,29.386119674436483,15.69034550406709
-photo_id_visual,"Government photo ID, visual inspection",minor_purchases_prevented,2274.0011477575954,3056.557231978735,4034.3250827920206,3091.0851595590893
-photo_id_visual,"Government photo ID, visual inspection",minor_purchases_permitted,669.181292627631,1075.7861940697182,1637.4117046512604,1104.2375785279353
-photo_id_visual,"Government photo ID, visual inspection",adult_false_rejections,329.9191142182461,711.428615919598,1305.6350261073048,752.0219295710104
-photo_id_visual,"Government photo ID, visual inspection",adult_abandonments,1191.463663452152,2268.6224562101315,3744.574767547957,2346.772223742298
-photo_id_visual,"Government photo ID, visual inspection",adult_adverse_outcomes,1840.8176997994367,3024.7501471754995,4595.014885277097,3098.794153313309
-photo_id_visual,"Government photo ID, visual inspection",higher_friction_adult_adverse_outcomes,414.1814038021634,765.2165112294994,1340.690678321766,805.0943145927235
-photo_id_visual,"Government photo ID, visual inspection",adult_adverse_outcomes_per_minor_purchase_prevented,0.6047470276858327,0.992904228461634,1.5166167418008318,1.0179797598522335
-photo_id_visual,"Government photo ID, visual inspection",adult_checks_per_minor_purchase_prevented,3.9583393033896455,5.170339315773118,6.741545984149612,5.238150410045145
+self_declaration,Self-declared age,total_annual_cost,1573.0359058148133,3686.8657875164913,6787.166561677044,3888.0998559957434
+self_declaration,Self-declared age,cost_per_minor_purchase_prevented,14.99478956941753,42.68306355167728,118.11646615509085,51.5421690359862
+self_declaration,Self-declared age,cost_per_minor_consumption_prevented,21.653306495467596,63.019284260282696,178.7914706308228,76.90476233742187
+visual_estimation,Visual age estimation by staff,minor_purchases_prevented,781.4636067599346,1230.5561364360171,1875.4610716071577,1267.3369311735541
+visual_estimation,Visual age estimation by staff,minor_substitution_events,179.9248796834929,377.5109454740618,698.6435365883825,400.2846277848442
+visual_estimation,Visual age estimation by staff,minor_consumption_prevented,501.21505745162034,834.7481386457075,1344.0207060878574,867.05230338871
+visual_estimation,Visual age estimation by staff,minor_purchases_permitted,2117.4916881253707,2894.098019443516,3855.2096054749627,2927.9858069134702
+visual_estimation,Visual age estimation by staff,adult_false_rejections,754.2845043110615,1473.5288633077057,2434.926543855765,1519.78344176427
+visual_estimation,Visual age estimation by staff,adult_abandonments,202.47067951757705,433.5123183487174,792.8992868496615,458.5200367172973
+visual_estimation,Visual age estimation by staff,adult_adverse_outcomes,1140.8235983642903,1929.7215655855243,2975.3043253463925,1978.3034784815673
+visual_estimation,Visual age estimation by staff,higher_friction_adult_adverse_outcomes,170.16297669799036,322.51136882846487,574.4304808441968,340.4434839204456
+visual_estimation,Visual age estimation by staff,adult_adverse_outcomes_per_minor_purchase_prevented,0.8521622540254983,1.5655861061370397,2.7380568772129856,1.65058269040946
+visual_estimation,Visual age estimation by staff,adult_adverse_outcomes_per_minor_consumption_prevented,1.207704366549207,2.2976298921867784,4.236899967295948,2.458716330136543
+visual_estimation,Visual age estimation by staff,adult_checks_per_minor_purchase_prevented,8.460739770691667,12.90812608855446,20.174211816029857,13.436842533128795
+visual_estimation,Visual age estimation by staff,identity_proofing_events,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,identity_records_created,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,centralized_identity_records,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,centralized_records_at_risk,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,expected_routine_records_exposed,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,expected_catastrophic_records_exposed,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,expected_records_exposed,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,transient_identity_images,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,biometric_scans,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,credential_assertions,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,third_party_disclosures,0.0,0.0,0.0,0.0
+visual_estimation,Visual age estimation by staff,total_annual_cost,8714.199550238736,17820.177320364484,31029.801443332155,18668.51118241516
+visual_estimation,Visual age estimation by staff,cost_per_minor_purchase_prevented,6.384910455079431,14.458967622535777,29.567044066581833,15.785416531418816
+visual_estimation,Visual age estimation by staff,cost_per_minor_consumption_prevented,9.14930365047895,21.2566641390548,45.33827020147536,23.515670314532855
+photo_id_visual,"Government photo ID, visual inspection",minor_purchases_prevented,2267.7079225979173,3057.0232843884028,4039.8821008340724,3093.2263250993883
+photo_id_visual,"Government photo ID, visual inspection",minor_substitution_events,573.9640060375424,1117.3378309307784,1870.8459152974342,1156.8149281471576
+photo_id_visual,"Government photo ID, visual inspection",minor_consumption_prevented,1213.3163487162283,1899.974004717634,2784.053737093391,1936.411396952231
+photo_id_visual,"Government photo ID, visual inspection",minor_purchases_permitted,669.498381767063,1073.7640169025146,1629.112195532415,1102.0964129876359
+photo_id_visual,"Government photo ID, visual inspection",adult_false_rejections,327.8610175330009,709.728422782546,1302.481399534241,751.2426750804896
+photo_id_visual,"Government photo ID, visual inspection",adult_abandonments,1205.8962677765892,2274.396075936473,3756.336896598546,2352.743579510465
+photo_id_visual,"Government photo ID, visual inspection",adult_adverse_outcomes,1850.8913651680339,3030.9481933908723,4600.791848326588,3103.9862545909546
+photo_id_visual,"Government photo ID, visual inspection",higher_friction_adult_adverse_outcomes,414.05897699269264,764.3993845306072,1340.377477108356,807.0458798375729
+photo_id_visual,"Government photo ID, visual inspection",adult_adverse_outcomes_per_minor_purchase_prevented,0.6069417400886188,0.9943119226419197,1.5170230709419392,1.0190672947917168
+photo_id_visual,"Government photo ID, visual inspection",adult_adverse_outcomes_per_minor_consumption_prevented,0.9146457074921367,1.5990277621834958,2.7287979417974104,1.6823376622945903
+photo_id_visual,"Government photo ID, visual inspection",adult_checks_per_minor_purchase_prevented,4.478250592237169,5.80340681276671,7.5234602320672135,5.873428915814347
+photo_id_visual,"Government photo ID, visual inspection",identity_proofing_events,16219.832683865694,21232.317686694747,27109.360124094273,21387.15040191775
 photo_id_visual,"Government photo ID, visual inspection",identity_records_created,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",centralized_identity_records,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",centralized_records_at_risk,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",expected_routine_records_exposed,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",expected_catastrophic_records_exposed,0.0,0.0,0.0,0.0
 photo_id_visual,"Government photo ID, visual inspection",expected_records_exposed,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",transient_identity_images,0.0,0.0,0.0,0.0
 photo_id_visual,"Government photo ID, visual inspection",biometric_scans,0.0,0.0,0.0,0.0
+photo_id_visual,"Government photo ID, visual inspection",credential_assertions,0.0,0.0,0.0,0.0
 photo_id_visual,"Government photo ID, visual inspection",third_party_disclosures,0.0,0.0,0.0,0.0
-photo_id_visual,"Government photo ID, visual inspection",total_annual_cost,18825.51379141337,36425.90661872381,62244.398863425806,38014.39143571127
-photo_id_visual,"Government photo ID, visual inspection",cost_per_minor_purchase_prevented,5.905525568743589,11.88973939672104,21.91166566527739,12.657295661406561
-document_upload,Document upload,minor_purchases_prevented,2278.5592903560364,3087.5832229528974,4088.444710416183,3122.4176022162665
-document_upload,Document upload,minor_purchases_permitted,617.9710138271257,1044.6282423351336,1624.508421686226,1072.905135870758
-document_upload,Document upload,adult_false_rejections,462.4999273451529,969.9942396050374,1813.1028660579377,1032.8862649982966
-document_upload,Document upload,adult_abandonments,2546.7020393827297,4404.076247001542,7054.269142480775,4554.1714881313765
-document_upload,Document upload,adult_adverse_outcomes,3544.398679000647,5463.193204316703,8041.878671776201,5587.057753129673
-document_upload,Document upload,higher_friction_adult_adverse_outcomes,881.2464173370535,1554.2006290088027,2590.871566933609,1618.4261527213048
-document_upload,Document upload,adult_adverse_outcomes_per_minor_purchase_prevented,1.1504559104607242,1.7754964456242188,2.6463602894635634,1.8191801844756614
-document_upload,Document upload,adult_checks_per_minor_purchase_prevented,4.07640223533874,5.261242102345419,6.800014498569539,5.326065066914367
-document_upload,Document upload,identity_records_created,13334.13921247691,22898.900425129497,37124.120045442534,23803.06313107671
-document_upload,Document upload,expected_records_exposed,152.67966273466618,470.9466416399876,1109.6877454193939,530.8197453891495
-document_upload,Document upload,biometric_scans,253.14458676585357,2936.1718299640743,8055.631129837953,3403.2961183436896
-document_upload,Document upload,third_party_disclosures,18476.56339707278,26389.116654759942,38839.74116295337,27238.387649329346
-document_upload,Document upload,total_annual_cost,55336.81399255544,93822.91186403282,150353.58418159865,97467.54927123788
-document_upload,Document upload,cost_per_minor_purchase_prevented,17.020468104173652,30.413109023631883,52.88136014076716,32.140343376300045
-facial_age_estimation,Facial age estimation,minor_purchases_prevented,1659.0252327719154,2367.1885705046443,3293.995677230408,2405.920663818477
-facial_age_estimation,Facial age estimation,minor_purchases_permitted,1129.8921549602499,1756.0731200287642,2557.415524285145,1789.4020742685475
-facial_age_estimation,Facial age estimation,adult_false_rejections,884.0072751376399,1772.1102021326128,3068.611990697655,1852.1197229835466
-facial_age_estimation,Facial age estimation,adult_abandonments,1064.0348667184885,2040.3562046436396,3556.766280923564,2146.5667275240917
-facial_age_estimation,Facial age estimation,adult_adverse_outcomes,2444.426804273162,3917.842630732448,5822.59816776677,3998.6864505076383
-facial_age_estimation,Facial age estimation,higher_friction_adult_adverse_outcomes,415.200880694376,748.7083119791888,1280.944646231233,785.0784929900278
-facial_age_estimation,Facial age estimation,adult_adverse_outcomes_per_minor_purchase_prevented,1.0084795851715873,1.6567187890424586,2.597305326598095,1.7096741728813318
-facial_age_estimation,Facial age estimation,adult_checks_per_minor_purchase_prevented,5.890548109529548,7.846386866132135,10.62721219062442,7.991335284316626
-facial_age_estimation,Facial age estimation,identity_records_created,2019.6364207014517,6686.630056539855,14886.598692753434,7376.22708497874
-facial_age_estimation,Facial age estimation,expected_records_exposed,20.354198917523078,97.722819000496,326.06101566408313,125.0704709255443
-facial_age_estimation,Facial age estimation,biometric_scans,17226.688646338545,21883.197873946567,27095.993185374857,21985.197337314734
-facial_age_estimation,Facial age estimation,third_party_disclosures,20874.209477786902,29367.336184648833,42926.51196209007,30304.720097254653
-facial_age_estimation,Facial age estimation,total_annual_cost,38692.88519283207,66633.83204261871,109732.8561556718,69586.37268499869
-facial_age_estimation,Facial age estimation,cost_per_minor_purchase_prevented,15.06299784038882,28.205365272600318,51.54273296142709,30.133417771346878
-reusable_age_token,Reusable third-party age token,minor_purchases_prevented,2161.5976385255963,2946.1622130657274,3931.4247877882212,2983.505587992279
-reusable_age_token,Reusable third-party age token,minor_purchases_permitted,718.0950733793347,1178.724974894752,1817.0950855957324,1211.8171500947456
-reusable_age_token,Reusable third-party age token,adult_false_rejections,341.3741522893705,763.976761354332,1440.1854956226887,812.5471344422483
-reusable_age_token,Reusable third-party age token,adult_abandonments,1018.2315192100187,2046.314050665863,3721.9745350850994,2170.673956721043
-reusable_age_token,Reusable third-party age token,adult_adverse_outcomes,1691.90289389317,2879.488446964152,4607.516953706571,2983.2210911632906
-reusable_age_token,Reusable third-party age token,higher_friction_adult_adverse_outcomes,394.9714128360143,758.2971439743047,1379.0200160912339,807.7912281851071
-reusable_age_token,Reusable third-party age token,adult_adverse_outcomes_per_minor_purchase_prevented,0.572449951093193,0.9814168271954272,1.582485018130596,1.0180290000213172
-reusable_age_token,Reusable third-party age token,adult_checks_per_minor_purchase_prevented,4.658036878712925,5.963719619195136,7.6994528012100405,6.042101573467113
-reusable_age_token,Reusable third-party age token,identity_records_created,2577.7553764829236,6902.45246248434,14504.641108578457,7540.086030175678
-reusable_age_token,Reusable third-party age token,expected_records_exposed,24.79674330963482,103.18363354992027,319.7458894600842,128.53502011823971
-reusable_age_token,Reusable third-party age token,biometric_scans,270.17137265104094,3127.1082111645433,8556.459033901798,3606.6287299069004
-reusable_age_token,Reusable third-party age token,third_party_disclosures,14167.755687127767,24257.07962651062,39016.971577319026,25166.053602529155
-reusable_age_token,Reusable third-party age token,total_annual_cost,76594.69437815766,134358.2550843625,223226.98984707377,140585.96665501344
-reusable_age_token,Reusable third-party age token,cost_per_minor_purchase_prevented,24.359706651493127,45.72254134001665,82.56479365689745,48.68604493257692
-in_person_enrolment,In-person enrolment for online access,minor_purchases_prevented,2669.971681427619,3535.4412254046106,4602.248473723841,3571.355443841274
-in_person_enrolment,In-person enrolment for online access,minor_purchases_permitted,310.8751490158645,598.2935027434114,1023.3501081918262,623.9672942457512
-in_person_enrolment,In-person enrolment for online access,adult_false_rejections,128.67912697579848,308.18012195867925,634.0026018195662,336.07037037079965
-in_person_enrolment,In-person enrolment for online access,adult_abandonments,4776.927354048793,7614.1211786231015,11102.225556582642,7736.020304796357
-in_person_enrolment,In-person enrolment for online access,adult_adverse_outcomes,5145.732407318823,7946.68629277295,11417.255920172844,8072.090675167156
-in_person_enrolment,In-person enrolment for online access,higher_friction_adult_adverse_outcomes,1073.284649252339,1891.971888355491,2989.8195480168783,1943.35119488691
-in_person_enrolment,In-person enrolment for online access,adult_adverse_outcomes_per_minor_purchase_prevented,1.4744637609505469,2.2594552448461003,3.201834670906803,2.2876697342117898
-in_person_enrolment,In-person enrolment for online access,adult_checks_per_minor_purchase_prevented,2.7346738635933017,3.658486503561065,4.816681474931268,3.70274438180722
-in_person_enrolment,In-person enrolment for online access,identity_records_created,5169.888961988389,10258.02839670132,18268.929330362073,10810.914303980957
-in_person_enrolment,In-person enrolment for online access,expected_records_exposed,26.936167791243623,94.31671192278651,259.1877815564482,112.23881425393374
-in_person_enrolment,In-person enrolment for online access,biometric_scans,86.36312838088982,967.5928005786308,2725.2868528235203,1136.6117157291246
-in_person_enrolment,In-person enrolment for online access,third_party_disclosures,4952.273054957839,9283.93377195062,15558.697560009668,9643.028764077728
-in_person_enrolment,In-person enrolment for online access,total_annual_cost,158034.57621414313,253437.64730263205,393557.9124947275,262180.7865999262
-in_person_enrolment,In-person enrolment for online access,cost_per_minor_purchase_prevented,42.60327107878186,71.73374901748866,119.00892331245234,75.1704277059735
+photo_id_visual,"Government photo ID, visual inspection",total_annual_cost,20090.405921886846,37705.36165142877,63366.00474869762,39338.65844000085
+photo_id_visual,"Government photo ID, visual inspection",cost_per_minor_purchase_prevented,6.276686359930736,12.354584611610537,22.406084356728623,13.08740070623775
+photo_id_visual,"Government photo ID, visual inspection",cost_per_minor_consumption_prevented,9.657126269248588,19.932260545738682,39.229964223842096,21.603522638044442
+document_upload,Document upload,minor_purchases_prevented,2292.453777666985,3089.8629052591023,4094.396914600918,3127.208693333889
+document_upload,Document upload,minor_substitution_events,669.5111439336057,1265.3956261868534,2067.8758621392594,1301.74650438196
+document_upload,Document upload,minor_consumption_prevented,1106.9624342622967,1788.4446546109534,2676.403993141107,1825.4621889519292
+document_upload,Document upload,minor_purchases_permitted,619.330710554648,1039.7866397779264,1614.6359226247384,1068.1140447531352
+document_upload,Document upload,adult_false_rejections,463.538412885823,969.485926502859,1806.9317715577927,1032.439341270088
+document_upload,Document upload,adult_abandonments,2539.3656102955233,4395.620937953482,7047.3344815016235,4544.500135323887
+document_upload,Document upload,adult_adverse_outcomes,3520.6087509490185,5453.292481055683,8041.7090664806165,5576.939476593976
+document_upload,Document upload,higher_friction_adult_adverse_outcomes,874.885597561477,1547.417668494554,2595.663843573739,1617.1588212563372
+document_upload,Document upload,adult_adverse_outcomes_per_minor_purchase_prevented,1.1432247955740036,1.7699260105976422,2.625248645052743,1.8119287810761706
+document_upload,Document upload,adult_adverse_outcomes_per_minor_consumption_prevented,1.8066121954056238,3.057304346435849,5.269007897413325,3.233545210244436
+document_upload,Document upload,adult_checks_per_minor_purchase_prevented,5.353804845098422,6.675100620419796,8.397393735355404,6.748319023686301
+document_upload,Document upload,identity_proofing_events,18463.715735241505,23467.979090578192,29089.09092333127,23583.562807878712
+document_upload,Document upload,identity_records_created,15465.52348691968,26473.635595539552,42540.59339809531,27445.20701265727
+document_upload,Document upload,centralized_identity_records,12474.193488435334,21963.62510589254,36288.871711301384,22865.378464575453
+document_upload,Document upload,centralized_records_at_risk,12837.072501901597,41191.905094692425,104577.76220551056,47740.74642583454
+document_upload,Document upload,expected_routine_records_exposed,187.73780874661298,820.7926888775295,2810.0966360336124,1065.9163995149233
+document_upload,Document upload,expected_catastrophic_records_exposed,13.130139936870528,80.75076385462746,353.02284029864944,118.2497401474167
+document_upload,Document upload,expected_records_exposed,230.39387135490236,925.0970305480641,3036.2181965176133,1184.16613966234
+document_upload,Document upload,transient_identity_images,21595.516454530407,30500.91376616412,44435.69995487644,31437.085066304535
+document_upload,Document upload,biometric_scans,301.64018584547614,3417.307969433303,9270.256796023197,3920.6539855139376
+document_upload,Document upload,credential_assertions,0.0,0.0,0.0,0.0
+document_upload,Document upload,third_party_disclosures,21543.427082575647,30452.86602524535,44541.618029324905,31443.061653676366
+document_upload,Document upload,total_annual_cost,60610.423060346024,99165.80541871015,155834.16729150192,102877.44269445045
+document_upload,Document upload,cost_per_minor_purchase_prevented,18.580622042884503,32.182905211502344,54.48687739853366,33.82455366094251
+document_upload,Document upload,cost_per_minor_consumption_prevented,29.85266128679344,55.948644964217614,105.54394598323212,60.3638826589563
+facial_age_estimation,Facial age estimation,minor_purchases_prevented,1656.6953196544046,2366.0752553653633,3294.2021184058576,2406.350094712833
+facial_age_estimation,Facial age estimation,minor_substitution_events,502.2013084919029,966.0602431455734,1618.3954032264899,1001.4497419652539
+facial_age_estimation,Facial age estimation,minor_consumption_prevented,815.52904124631,1364.4200955687852,2128.418302980601,1404.9003527475793
+facial_age_estimation,Facial age estimation,minor_purchases_permitted,1133.381670492515,1754.3189240313877,2560.0752991604545,1788.9726433741912
+facial_age_estimation,Facial age estimation,adult_false_rejections,878.8584598199727,1769.5849580271665,3070.3109168530336,1850.0283459488355
+facial_age_estimation,Facial age estimation,adult_abandonments,1062.7635355619573,2048.200155095804,3565.339305032209,2149.8026706458536
+facial_age_estimation,Facial age estimation,adult_adverse_outcomes,2446.872079411728,3920.454721280761,5818.708717256457,3999.8310165946896
+facial_age_estimation,Facial age estimation,higher_friction_adult_adverse_outcomes,413.4030571970486,749.105929454339,1285.5414438707035,785.9241491078335
+facial_age_estimation,Facial age estimation,adult_adverse_outcomes_per_minor_purchase_prevented,1.004836036067697,1.6563346744356091,2.5958140656058304,1.7097947686680395
+facial_age_estimation,Facial age estimation,adult_adverse_outcomes_per_minor_consumption_prevented,1.6146547328505796,2.869424266049645,5.129112709356192,3.0522716429516428
+facial_age_estimation,Facial age estimation,adult_checks_per_minor_purchase_prevented,6.608073051463923,8.702578108420369,11.748278490699208,8.879049093021347
+facial_age_estimation,Facial age estimation,identity_proofing_events,18895.816153560663,23879.774394690216,29470.82175755728,24002.519504753483
+facial_age_estimation,Facial age estimation,identity_records_created,2146.488135282597,7047.739496044494,15730.627680156496,7782.609916850533
+facial_age_estimation,Facial age estimation,centralized_identity_records,883.8983194996433,3133.4928155234993,8083.855350013924,3635.016127942986
+facial_age_estimation,Facial age estimation,centralized_records_at_risk,347.5435073071092,1978.4996172291612,7961.4879956927925,2780.486943417268
+facial_age_estimation,Facial age estimation,expected_routine_records_exposed,3.981197782794191,29.11666098200714,153.23387600250177,47.368889777817074
+facial_age_estimation,Facial age estimation,expected_catastrophic_records_exposed,0.4072940376983104,3.814801300738517,23.9622129284675,6.8959111608788275
+facial_age_estimation,Facial age estimation,expected_records_exposed,5.114270154917621,34.47476853891882,171.84870721712215,54.26480093869589
+facial_age_estimation,Facial age estimation,transient_identity_images,18895.816153560663,23879.774394690216,29470.82175755728,24002.519504753483
+facial_age_estimation,Facial age estimation,biometric_scans,18200.4847394161,23077.399241682924,28547.273907196974,23205.591460694486
+facial_age_estimation,Facial age estimation,credential_assertions,0.0,0.0,0.0,0.0
+facial_age_estimation,Facial age estimation,third_party_disclosures,21989.89762894664,31065.142969049288,45336.49178030014,32035.004392412942
+facial_age_estimation,Facial age estimation,total_annual_cost,40940.280712413136,68647.26119102232,112319.6895794324,71867.16534207239
+facial_age_estimation,Facial age estimation,cost_per_minor_purchase_prevented,16.05217373895115,29.112692590495485,52.83988543220357,31.084491283988015
+facial_age_estimation,Facial age estimation,cost_per_minor_consumption_prevented,25.75742158792592,50.75727547941679,101.35121988783844,55.49731732846224
+reusable_age_token,Reusable third-party age token,minor_purchases_prevented,2162.8180693498794,2947.921482837242,3935.799110696923,2984.1658552211534
+reusable_age_token,Reusable third-party age token,minor_substitution_events,639.6906184751093,1207.0376200980972,1979.6695182161625,1243.4211752874503
+reusable_age_token,Reusable third-party age token,minor_consumption_prevented,1045.702263945053,1702.9707971163007,2571.416490361198,1740.7446799337035
+reusable_age_token,Reusable third-party age token,minor_purchases_permitted,723.6202127651968,1176.8496677101216,1808.4770437010732,1211.1568828658706
+reusable_age_token,Reusable third-party age token,adult_false_rejections,345.4322842231319,763.2685710673898,1436.0581527282675,813.5298050818288
+reusable_age_token,Reusable third-party age token,adult_abandonments,1016.8148077178361,2044.426750495585,3723.543395958239,2167.5429468195616
+reusable_age_token,Reusable third-party age token,adult_adverse_outcomes,1690.8238397216337,2881.6696896402314,4605.99252439085,2981.0727519013903
+reusable_age_token,Reusable third-party age token,higher_friction_adult_adverse_outcomes,396.96768938469864,757.238004097385,1377.8912000255418,805.8459290586608
+reusable_age_token,Reusable third-party age token,adult_adverse_outcomes_per_minor_purchase_prevented,0.5729288048564849,0.9785956155392518,1.5851571197667222,1.0170141634634624
+reusable_age_token,Reusable third-party age token,adult_adverse_outcomes_per_minor_consumption_prevented,0.9207845785611847,1.6937096572659094,3.125558599209178,1.8168035075700588
+reusable_age_token,Reusable third-party age token,adult_checks_per_minor_purchase_prevented,5.2261926010252475,6.62625209625189,8.548600076938595,6.7195285431932925
+reusable_age_token,Reusable third-party age token,identity_proofing_events,2003.5169193904817,4121.861540176984,7230.155297909862,4316.085147622427
+reusable_age_token,Reusable third-party age token,identity_records_created,1816.4819744025274,4014.4596656068998,7807.770521355957,4307.354877932239
+reusable_age_token,Reusable third-party age token,centralized_identity_records,995.4248001942481,2409.892528355093,5151.229086042084,2655.857061032892
+reusable_age_token,Reusable third-party age token,centralized_records_at_risk,2046.7690300000615,6984.134383348073,19725.414099928254,8409.697565519453
+reusable_age_token,Reusable third-party age token,expected_routine_records_exposed,21.191846193255657,104.44533491430929,398.7268852157512,143.01302012952988
+reusable_age_token,Reusable third-party age token,expected_catastrophic_records_exposed,2.071032315997555,13.549493959975528,62.29124609328705,20.610985873307804
+reusable_age_token,Reusable third-party age token,expected_records_exposed,27.478958991276734,122.48607914502935,443.5385958565948,163.6240060028377
+reusable_age_token,Reusable third-party age token,transient_identity_images,1068.1866263648149,3875.667265019785,9027.065201392175,4308.0827075942025
+reusable_age_token,Reusable third-party age token,biometric_scans,44.985892709733136,561.75980249132,1909.6661972501574,714.4198696153164
+reusable_age_token,Reusable third-party age token,credential_assertions,13410.886273974327,19530.903580762115,26225.93965036452,19627.123959100263
+reusable_age_token,Reusable third-party age token,third_party_disclosures,17668.310828611975,25099.960467939978,34100.32415976916,25387.421968828774
+reusable_age_token,Reusable third-party age token,total_annual_cost,79428.44139645903,137206.4367384197,225490.4363337827,143378.96473544114
+reusable_age_token,Reusable third-party age token,cost_per_minor_purchase_prevented,25.185950127843128,46.70713594969378,83.59208892229408,49.64248820059102
+reusable_age_token,Reusable third-party age token,cost_per_minor_consumption_prevented,40.8865807217722,81.24753184752308,161.37507067892196,88.6933624977761
+in_person_enrolment,In-person enrolment for later online access,minor_purchases_prevented,2663.4051141384616,3536.569797840738,4600.586888754521,3571.821649449205
+in_person_enrolment,In-person enrolment for later online access,minor_substitution_events,823.7076446173077,1573.406576405467,2525.833067332402,1609.6969332772967
+in_person_enrolment,In-person enrolment for later online access,minor_consumption_prevented,1138.3104549226932,1918.0937413455517,2946.5144194215077,1962.1247161719077
+in_person_enrolment,In-person enrolment for later online access,minor_purchases_permitted,310.23723902844097,597.9440493209186,1020.1945165157298,623.5010886378199
+in_person_enrolment,In-person enrolment for later online access,adult_false_rejections,128.8755090158511,308.1458788355518,630.5318745145477,335.25487237724053
+in_person_enrolment,In-person enrolment for later online access,adult_abandonments,4821.17186771977,7641.278407341493,11091.15941587593,7755.729279862323
+in_person_enrolment,In-person enrolment for later online access,adult_adverse_outcomes,5182.5513912177275,7977.421565415605,11417.07867365671,8090.9841522395645
+in_person_enrolment,In-person enrolment for later online access,higher_friction_adult_adverse_outcomes,1079.0841380786685,1897.4230841856684,2988.79377308042,1946.7169407064882
+in_person_enrolment,In-person enrolment for later online access,adult_adverse_outcomes_per_minor_purchase_prevented,1.4854752792955181,2.2607765050185673,3.204212550303973,2.293359375445317
+in_person_enrolment,In-person enrolment for later online access,adult_adverse_outcomes_per_minor_consumption_prevented,2.4432741231936523,4.152315880187253,7.276609899369612,4.41053320662705
+in_person_enrolment,In-person enrolment for later online access,adult_checks_per_minor_purchase_prevented,4.669804045308422,5.731703435205569,7.060851179310014,5.7834841908114845
+in_person_enrolment,In-person enrolment for later online access,identity_proofing_events,2300.5316161254163,4930.2302423758165,8571.319084880643,5126.541553835475
+in_person_enrolment,In-person enrolment for later online access,identity_records_created,2093.2836320886436,4798.83131921024,9338.733417890668,5132.61323613728
+in_person_enrolment,In-person enrolment for later online access,centralized_identity_records,949.4711185448551,2463.386228175644,5501.345492230487,2739.39090049115
+in_person_enrolment,In-person enrolment for later online access,centralized_records_at_risk,1943.8059798633028,7014.328522061678,20874.553876968203,8648.702653396178
+in_person_enrolment,In-person enrolment for later online access,expected_routine_records_exposed,12.269729204329213,63.25297188166931,257.4279896383076,89.45263558456
+in_person_enrolment,In-person enrolment for later online access,expected_catastrophic_records_exposed,1.4646490483849253,9.790797641688503,47.995681828511024,15.355734486963986
+in_person_enrolment,In-person enrolment for later online access,expected_records_exposed,16.366571873159806,76.46262402504561,290.8342959278152,104.80837007152397
+in_person_enrolment,In-person enrolment for later online access,transient_identity_images,632.8821980662624,2321.2042768836245,5384.400659652884,2567.4112401627326
+in_person_enrolment,In-person enrolment for later online access,biometric_scans,22.594843347427666,267.8486616368177,905.0563401991525,340.9256968646894
+in_person_enrolment,In-person enrolment for later online access,credential_assertions,13906.325296412131,20225.293199120046,26978.156799299875,20308.615116119992
+in_person_enrolment,In-person enrolment for later online access,third_party_disclosures,16183.324616529892,23044.80909845356,30840.509128355905,23210.898056136444
+in_person_enrolment,In-person enrolment for later online access,total_annual_cost,146929.7198994788,244314.1981600249,383842.77123472485,252521.63417211006
+in_person_enrolment,In-person enrolment for later online access,cost_per_minor_purchase_prevented,39.572570810997895,68.88157176149792,116.77011580560931,72.47147552714097
+in_person_enrolment,In-person enrolment for later online access,cost_per_minor_consumption_prevented,66.30212592002916,128.13841114449804,251.34093108513434,139.46703123538643

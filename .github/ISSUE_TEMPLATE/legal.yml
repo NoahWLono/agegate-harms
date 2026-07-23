@@ -1,0 +1,29 @@
+name: Legal or regulatory update
+about: Record an authoritative legal source change
+labels: [legal]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Authoritative source and date checked
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Exact change and effective date
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Model, documentation, or evidence records affected
+    validations:
+      required: true
+  - type: checkboxes
+    id: caution
+    attributes:
+      label: Confirmation
+      options:
+        - label: This issue distinguishes legal text from legal interpretation.
+          required: true

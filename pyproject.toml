@@ -1,7 +1,7 @@
 [project]
 name = "agegate-harms"
-version = "0.1.0"
-description = "Transparent scenario simulator for age-verification policy trade-offs"
+version = "0.2.0"
+description = "Transparent scenario simulator and evidence registry for age-assurance policy trade-offs"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
@@ -21,6 +21,7 @@ dev = [
 
 [project.scripts]
 agegate-run = "agegate_harms.cli:main"
+agegate-evidence = "agegate_harms.evidence:main"
 
 [build-system]
 requires = ["setuptools>=69"]

@@ -1,0 +1,98 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check canonical text whitespace
+        run: |
+          python3 scripts/normalize_whitespace.py
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff --check
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - name: Synchronize dependencies
+        run: |
+          if [[ -f uv.lock ]]; then
+            uv sync --locked --extra dev
+            uv lock --check
+          else
+            uv sync --extra dev
+          fi
+      - name: Validate evidence mappings
+        run: uv run agegate-evidence --config data/scenarios/quebec_bill9_v02.yaml --evidence data/evidence.csv --output results/evidence_coverage.csv
+      - name: Run tests and Ruff
+        run: |
+          uv run pytest
+          uv run ruff check .
+      - name: Run a reduced reproducibility experiment
+        run: uv run agegate-run --config data/scenarios/quebec_bill9_v02.yaml --evidence data/evidence.csv --output results --simulations 1000 --seed 20260722
+
+  momiji-fish:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install Momiji-compatible command-line dependencies
+        run: pacman -Syu --noconfirm git fish python uv
+      - uses: actions/checkout@v6
+      - name: Report Arch and fish versions
+        run: |
+          cat /etc/arch-release
+          fish --version
+          python --version
+          uv --version
+      - name: Syntax-check every fish entry point
+        shell: fish {0}
+        run: |
+          for fish_file in run_experiment.fish scripts/*.fish packaging/*.fish
+              fish -n $fish_file
+          end
+      - name: Check canonical text whitespace
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          python scripts/normalize_whitespace.py
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff --check
+      - name: Exercise the bundle installer in copy-only mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          bundle_root="$(mktemp -d)"
+          install_home="$(mktemp -d)"
+          mkdir -p "$bundle_root/project"
+          cp packaging/install-on-momiji.fish "$bundle_root/install-on-momiji.fish"
+          cp packaging/install-on-momiji.sh "$bundle_root/install-on-momiji.sh"
+          tar \
+            --exclude=.git \
+            --exclude=.venv \
+            --exclude=.pytest_cache \
+            --exclude=__pycache__ \
+            -cf - . | tar -xf - -C "$bundle_root/project"
+          HOME="$install_home" fish "$bundle_root/install-on-momiji.fish" \
+            --yes \
+            --skip-build \
+            --target "$install_home/Projects/agegate-harms"
+          test -x "$install_home/Projects/agegate-harms/run_experiment.fish"
+          test -f "$install_home/Projects/agegate-harms/PUBLISHING.md"
+      - name: Run the end-to-end workflow through native fish
+        shell: fish {0}
+        run: fish run_experiment.fish --simulations 1000 --seed 20260722 --skip-ui
+      - name: Verify generated outputs
+        run: |
+          test -s results/REPORT.md
+          test -s results/dashboard.html
+          test -s results/run_manifest.json
+          test -s results/parameter_catalog.csv

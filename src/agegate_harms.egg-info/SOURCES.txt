@@ -1,8 +1,12 @@
+LICENSE
 README.md
 pyproject.toml
 src/agegate_harms/__init__.py
 src/agegate_harms/cli.py
+src/agegate_harms/evidence.py
+src/agegate_harms/manifest.py
 src/agegate_harms/model.py
+src/agegate_harms/priorities.py
 src/agegate_harms/reporting.py
 src/agegate_harms.egg-info/PKG-INFO
 src/agegate_harms.egg-info/SOURCES.txt
@@ -10,4 +14,7 @@ src/agegate_harms.egg-info/dependency_links.txt
 src/agegate_harms.egg-info/entry_points.txt
 src/agegate_harms.egg-info/requires.txt
 src/agegate_harms.egg-info/top_level.txt
+tests/test_git_whitespace_policy.py
 tests/test_model.py
+tests/test_shell_entrypoints.py
+tests/test_whitespace_normalizer.py

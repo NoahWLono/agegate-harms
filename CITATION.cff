@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: AgeGate Harms
+message: Please cite this software and identify the scenario version and run manifest used.
+type: software
+authors:
+  - family-names: Weinberger
+    given-names: Noah
+version: 0.2.0
+date-released: 2026-07-22
+repository-code: https://github.com/NoahWLono/agegate-harms
+license: MIT
+abstract: Transparent scenario simulator and evidence registry for age-assurance policy trade-offs.
+keywords:
+  - age assurance
+  - privacy
+  - accessibility
+  - civil liberties
+  - policy simulation
+  - Quebec

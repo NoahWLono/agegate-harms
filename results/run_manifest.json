@@ -1,52 +1,69 @@
 {
-  "experiment": "AgeGate Harms",
-  "version": "0.1.0",
-  "generated_utc": "2026-07-22T20:16:00.432431+00:00",
-  "status": "core experiment completed",
-  "evidence_status": "all numerical inputs are illustrative assumptions",
-  "scenario": "hypothetical Quebec-style energy-drink retail age-check scenario",
-  "methods_compared": 8,
-  "command": "PYTHONPATH=src python -m agegate_harms.cli --simulations 50000 --seed 20260722",
-  "simulations": 50000,
-  "seed": 20260722,
+  "config": {
+    "path": "data/scenarios/quebec_bill9_v02.yaml",
+    "sha256": "5443d3d154646cf145c8c0ec1d44601b3445cfbcb981db690515fea03b6c2382"
+  },
+  "evidence_registry": {
+    "path": "data/evidence.csv",
+    "sha256": "63aee721ffb5e4f7bf5641baac5459c37edabab0a4a25948a9b18d110ca6fe7b"
+  },
+  "generated_at_utc": "2026-07-23T19:04:11.623360+00:00",
+  "outputs": [
+    {
+      "path": "results/deterministic_results.csv",
+      "sha256": "14a688eee0ddb5085d5815d03c74cb2a8f557551edcb195d502bae41e16818c8"
+    },
+    {
+      "path": "results/monte_carlo_summary.csv",
+      "sha256": "a9bdd77c07e78556b290974cdf744b7564ac8c130ed0fadaa98cbce908b69e72"
+    },
+    {
+      "path": "results/sensitivity.csv",
+      "sha256": "3b2acfe2c415e306cecf87e8205fb5630f672277e5f22b9ff81f4f9e8be742cc"
+    },
+    {
+      "path": "results/evidence_coverage.csv",
+      "sha256": "aefa3b1b13102031f839626a4089be991c3aea69d5766ba1019330ac0c6c302b"
+    },
+    {
+      "path": "results/evidence_priorities.csv",
+      "sha256": "6138592729faac14ff0ccf5a24a6951f318dbeaf51de0f47298acad606a160e8"
+    },
+    {
+      "path": "results/REPORT.md",
+      "sha256": "75014caf1a9c216dfb2aee7d57845d4a34ef133dd3527da8b0d49e0b0da91f23"
+    },
+    {
+      "path": "results/tradeoff.png",
+      "sha256": "813c83c0152328960b7cf1a6178d6cf4ee1ccc75207532a71b1c8fdc6467de05"
+    },
+    {
+      "path": "results/privacy_footprint.png",
+      "sha256": "4d5428b93a4d7afdf172146eb3c09df60603213f57cccc7d0b2c3669518bd22b"
+    },
+    {
+      "path": "results/substitution.png",
+      "sha256": "7954111559b1341e6fdfaa29477d5b4f136b12f6b2618f67fae57ac8b42ba18e"
+    },
+    {
+      "path": "results/evidence_priorities.png",
+      "sha256": "c36c9b67110078821d8754c7d0caf7e019d386b655c564c472936a954dd3b450"
+    },
+    {
+      "path": "results/dashboard.html",
+      "sha256": "d906bfb33e8657175c37c0ae7b7d3080873a1f01e29bf27eb026a812098dde3f"
+    }
+  ],
+  "project": "AgeGate Harms",
+  "project_version": "0.2.0",
   "runtime": {
-    "elapsed": "00:05.94",
-    "max_rss_kb": 309708
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "platform": "Linux-7.1.4-arch1-1-x86_64-with-glibc2.43",
+    "python": "3.14.6 (main, Jun 15 2026, 11:36:54) [GCC 16.1.1 20260430]",
+    "pyyaml": "6.0.3"
   },
-  "tests": {
-    "collected": 11,
-    "passed": 11,
-    "failed": 0
-  },
-  "packaging_smoke_test": {
-    "editable_install_without_dependency_resolution": "passed",
-    "console_entrypoint": "passed with 1000 simulations and sensitivity output"
-  },
-  "python": "3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]",
-  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
-  "packages": {
-    "numpy": "2.3.5",
-    "pandas": "2.2.3",
-    "pyyaml": "6.0.3",
-    "matplotlib": "3.10.8",
-    "pytest": "9.0.2"
-  },
-  "ui_validation": {
-    "static_dashboard": "generated as a self-contained HTML file",
-    "streamlit_app": "source included but not launched in this VM because the internal Python package mirror did not supply Streamlit; the core experiment does not require Streamlit"
-  },
-  "sha256": {
-    "pyproject.toml": "4dbf3965336e2a3b81d268b6a76fdf26b99f65fcafcc0177e99971580b79301c",
-    "data/assumptions.yaml": "610eaf9f7273024bfd1e573f2fedeb977bb23d00d813598372eacca1e0af1d1d",
-    "src/agegate_harms/model.py": "421ac93c578041aa806a09810c205ffed58b85d464ce9e3e1e088c46a00dafae",
-    "src/agegate_harms/reporting.py": "02b85ba3ae1746f81e05474c94fd0831d6a1e1e6517b8598e83aa2ee8bbd53fe",
-    "src/agegate_harms/cli.py": "0e528c3bbd40551b45dd8ff625c7723d25026620dcc2cafe775efdccbedfa4eb",
-    "results/deterministic_results.csv": "5a3d93ae4a128e45aae9fe0addf24f49a5e8e07aa6425f678d66ff3e5437f5c2",
-    "results/monte_carlo_summary.csv": "9acc2551009309ab13f79bfa2a858c8d4655e3e7703901b52a17e873abe6dcb6",
-    "results/sensitivity.csv": "3cf4e177378aa4ff06436e2a4b0d6698b6db9a38cdc972a7b016416fbe7387f7",
-    "results/REPORT.md": "ed55957235e788ab30eee438ef74e2e282eda8fe5b084c4499061c6e892a5fa5",
-    "results/dashboard.html": "2c15b9348d1efbd8a0e655f81ba8e7cac85ca22c482d8b4e337e5c1f756898aa",
-    "results/tradeoff.png": "6e77bba0004b815875238e38a35a65878fc6a936fe90723ab89d125b0fb93774",
-    "results/privacy_footprint.png": "9d7c2cff8390050e5d0723ffd63e7e1d18b861188a2d93b98b459b0537fbe4da"
-  }
+  "seed": 20260722,
+  "simulations": 50000
 }
