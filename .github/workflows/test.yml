@@ -15,10 +15,6 @@ jobs:
         python-version: ["3.11", "3.13"]
     steps:
       - uses: actions/checkout@v6
-      - name: Pin canonical Git whitespace policy
-        run: |
-          git config --global core.whitespace indent-with-non-tab
-          git config --local core.whitespace blank-at-eol,blank-at-eof,space-before-tab
       - name: Install uv and Python
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
@@ -53,10 +49,6 @@ jobs:
       - name: Install Momiji-compatible command-line dependencies
         run: pacman -Syu --noconfirm git fish python uv
       - uses: actions/checkout@v6
-      - name: Pin canonical Git whitespace policy
-        run: |
-          git config --global core.whitespace tab-in-indent
-          git config --local core.whitespace blank-at-eol,blank-at-eof,space-before-tab
       - name: Report Arch and fish versions
         run: |
           cat /etc/arch-release
@@ -71,6 +63,7 @@ jobs:
           end
       - name: Check canonical text whitespace
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           python scripts/normalize_whitespace.py
           git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff --check
       - name: Exercise the bundle installer in copy-only mode
