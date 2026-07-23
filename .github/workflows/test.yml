@@ -15,6 +15,10 @@ jobs:
         python-version: ["3.11", "3.13"]
     steps:
       - uses: actions/checkout@v6
+      - name: Check canonical text whitespace
+        run: |
+          python3 scripts/normalize_whitespace.py
+          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff --check
       - name: Install uv and Python
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
         with:
@@ -28,10 +32,6 @@ jobs:
           else
             uv sync --extra dev
           fi
-      - name: Check canonical text whitespace
-        run: |
-          uv run python scripts/normalize_whitespace.py
-          git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab diff --check
       - name: Validate evidence mappings
         run: uv run agegate-evidence --config data/scenarios/quebec_bill9_v02.yaml --evidence data/evidence.csv --output results/evidence_coverage.csv
       - name: Run tests and Ruff
