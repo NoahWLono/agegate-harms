@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
-.streamlit/
-results/*.tmp
 .DS_Store
+results/monte_carlo_raw.csv.gz
+research/interviews/private/
+research/sources/pdfs/
+research/legal/regulatory_state.json
+research/legal/snapshots/

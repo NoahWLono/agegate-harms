@@ -1,0 +1,28 @@
+name: Accessibility or distributional issue
+about: Report a barrier, unequal burden, or missing accommodation
+labels: [accessibility]
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow and barrier
+      description: Identify the exact step without including personal or confidential information.
+    validations:
+      required: true
+  - type: textarea
+    id: affected
+    attributes:
+      label: Who may be affected and through what mechanism
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Candidate measurable outcomes
+      placeholder: abandonment, false rejection, time, assistance, privacy burden
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Accessible alternative or research method

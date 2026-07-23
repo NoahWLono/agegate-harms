@@ -1,0 +1,18 @@
+title,label,priority,body_file
+Estimate covered Quebec transaction volume and buyer-age mix,evidence,P0,research/notes/transaction-volume-issue.md
+Measure retailer challenge rates under explicit policies,evidence,P0,research/notes/challenge-rate-issue.md
+Measure lawful-adult abandonment by workflow and group,accessibility,P0,research/notes/abandonment.md
+Measure false rejection at the threshold of 16,evidence,P0,research/notes/false-rejection.md
+Measure circumvention pathways after an initial block,evidence,P0,research/notes/circumvention.md
+Measure product and channel substitution after a blocked purchase,evidence,P0,research/notes/substitution.md
+Map accepted photo-ID access and replacement barriers,accessibility,P0,research/notes/id-access.md
+Map section 4 remote-sales regulations and data flows,legal,P0,research/legal/regulations-watch.md
+Collect retailer fixed and variable cost evidence,economics,P1,research/notes/retailer-costs.md
+Conduct disabled-user workflow testing,accessibility,P1,research/notes/accessibility.md
+Create implementation-specific privacy threat models,privacy,P1,research/notes/data-flows.md
+Validate facial age estimation with threshold-specific independent evidence,privacy,P1,research/notes/false-rejection.md
+Segment the higher-friction adult category,distributional,P1,data/distributional_groups.csv
+Add repeated-user credential lifecycle states,model,P2,docs/model-v02.md
+Add product and channel substitution transition matrix,model,P2,research/notes/substitution.md
+Add retailer-size and queueing model,model,P2,research/notes/retailer-costs.md
+Commission bilingual source and terminology review,documentation,P2,docs/sommaire-executif-fr.md

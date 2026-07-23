@@ -1,0 +1,12 @@
+stakeholder_id,category,target_number,priority,core_questions,recruitment_route,status,ethics_notes
+retail_independent,Independent convenience retailers,8,P0,"challenge workflow; time; documents; queues; cost; customer response",retail associations and direct outreach,not_started,"Avoid collecting customer identifiers or confidential sales data without agreement"
+retail_chain,Chain or franchise operators,5,P1,"policy standardization; training; scale; system integration; enforcement",corporate public affairs and operations,not_started,"Separate corporate policy from measured store behaviour"
+online_delivery,Online sellers and delivery platforms,5,P0,"remote workflow; account reuse; data flow; failed delivery; regulation",platform policy and compliance teams,not_started,"Section 4 design is unsettled"
+vending,Vending operators,3,P1,"technical feasibility; location; unattended sales; cost",industry contacts,not_started,"Review future regulation before fieldwork"
+affected_id_barrier,Adults facing photo-ID barriers,12,P0,"document access; dignity; alternatives; abandonment",community organizations,not_started,"Community-led protocol and compensation recommended"
+disabled_users,Disabled people testing relevant workflows,15,P0,"camera; document; cognition; mobility; appeals; assistance",disability organizations and accessibility labs,not_started,"Accessible consent and materials required"
+privacy_sensitive,People likely to decline biometric or identity processing,10,P1,"privacy objection; alternatives; chilling effect; channel switching",civil-liberties and privacy communities,not_started,"Do not frame principled refusal as user error"
+public_health,Public-health and youth-behaviour researchers,6,P1,"consumption; substitution; health pathway; evaluation design",universities and public-health institutes,not_started,"Keep health outcomes separate from transaction counts"
+age_assurance_engineers,Age-assurance and digital-identity engineers,6,P1,"threshold performance; architecture; retention; assertions; attacks",standards and industry contacts,not_started,"Disclose vendor affiliations and seek independent evidence"
+legal_regulatory,Quebec legal and regulatory specialists,5,P0,"statutory interpretation; regulations; due diligence; enforcement",legal academics and practitioners,not_started,"Research discussion is not legal advice"
+civil_liberties,Privacy and civil-liberties researchers,6,P1,"proportionality; surveillance; function creep; alternatives",research organizations,not_started,"Record normative and empirical claims separately"

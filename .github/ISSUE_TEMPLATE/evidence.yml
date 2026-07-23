@@ -1,0 +1,55 @@
+name: Evidence contribution
+about: Add or revise an empirical, legal, guidance, assumption, or gap record
+title: "Evidence: "
+labels: [evidence]
+body:
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Relationship to parameter
+      options:
+        - direct
+        - contextual
+        - legal
+        - guidance
+        - assumption
+        - gap
+    validations:
+      required: true
+  - type: input
+    id: parameter
+    attributes:
+      label: Parameter and method
+      placeholder: methods.photo_id_visual.adult_false_rejection_rate
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      placeholder: Stable source URL or citation
+    validations:
+      required: true
+  - type: textarea
+    id: estimate
+    attributes:
+      label: Estimate, uncertainty, unit, population, threshold, and workflow
+    validations:
+      required: true
+  - type: textarea
+    id: transferability
+    attributes:
+      label: Directness, transferability, independence, and limitations
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I distinguished measured facts from interpretation and assumptions.
+          required: true
+        - label: I recorded conflicts of interest or vendor involvement.
+          required: true
+        - label: I did not average incompatible studies automatically.
+          required: true

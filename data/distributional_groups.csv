@@ -1,0 +1,11 @@
+group_id,working_description,mechanisms_to_study,candidate_outcomes,research_safeguard
+adults_without_current_photo_id,Adults without current accepted photo ID,"ID access, replacement cost, documentation requirements",photo ID refusal and abandonment,Do not infer prevalence from a selected senior sample.
+disabled_camera_or_document_users,"People whose disability affects camera, document, kiosk, or mobility workflows","accessible alternatives, support, in-person access","abandonment, false rejection, time burden",Test with disabled participants and accessibility specialists.
+cognitive_access_needs,"People with cognitive, memory, or learning access needs","authentication complexity, transcription, appeals",abandonment and support burden,"Use WCAG 2.2 as design guidance, not a prevalence estimate."
+trans_and_gender_diverse_adults,Trans and gender-diverse adults whose appearance or records may not align,"document matching, human scrutiny, automated estimation","false rejection, stigma, privacy burden",Collect evidence with community-led review.
+migrants_and_nonstandard_documents,Migrants and people using unfamiliar or nonstandard documents,"document acceptance, language, transliteration",false rejection and delay,Separate legal eligibility from system support.
+unstably_housed_people,People who are homeless or unstably housed,"document loss, address requirements, device access",exclusion and abandonment,Avoid treating lack of ID as an individual failure.
+low_digital_access,"People with older devices, weak connectivity, or low digital literacy","upload quality, bandwidth, support","abandonment, repeated attempts, cost",Measure by channel and device.
+privacy_sensitive_users,People who decline biometric or identity processing,"chilling effects, alternatives, purpose limitation",abandonment and channel switching,Distinguish inability from principled refusal.
+racialized_and_indigenous_groups,Racialized and Indigenous people potentially affected by unequal error or scrutiny,"algorithmic and human error, document access, enforcement","false rejection, over-checking, dignity harms",Require group-specific evidence and governance.
+rural_and_remote_residents,"People in rural, remote, and northern communities","travel distance, in-person enrollment, connectivity","abandonment, time and travel cost",Model geographic access separately.

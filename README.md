@@ -1,327 +1,250 @@
 # AgeGate Harms
 
-**Created and maintained by [Noah Weinberger](https://github.com/NoahWLono).**
+**Created and maintained by Noah Weinberger.**
 
-AgeGate Harms is an independent research project examining the privacy, accessibility, civil-liberties, and implementation costs of age-assurance mandates.
+AgeGate Harms is an independent research project examining the privacy, accessibility, civil-liberties, distributional, behavioural, and implementation costs of age-assurance mandates.
 
-**A transparent policy simulator for measuring what age-assurance systems prevent, whom they burden, what data they create, and how much they cost.**
+> A transparent policy simulator and evidence registry for measuring what age-assurance systems prevent, whom they burden, what data they process, and how much they cost.
 
-Age restrictions are often debated as though enforcement were a binary switch: verify age, block minors, problem solved. Real systems are not binary. Every age-assurance method has error rates, compliance costs, privacy consequences, accessibility failures, circumvention pathways, and distributional effects.
+## Research status
 
-AgeGate Harms makes those trade-offs visible.
+Version 0.2 is a local release candidate dated **2026-07-22**. It contains:
 
-The project began as a case study of Quebec's 2026 energy-drink law, Bill 9, but the underlying model is intended to support analysis of age gates for social media, app stores, online marketplaces, games, adult content, AI services, and other regulated products or spaces.
+- a sourced legal snapshot of Quebec's 2026 Bill 9;
+- a structured evidence registry with 379 records;
+- a parameter-level evidence coverage report;
+- a sensitivity-ranked research backlog;
+- an expanded behavioural, identity-processing, retention, breach, and cost model;
+- a stakeholder interview and validation package;
+- English and French executive summaries;
+- a regulation-source change watcher;
+- reproducible tests, reports, charts, dashboard, and run manifest.
 
-> **Research status:** Version 0.1 is a working prototype. Its numerical inputs are illustrative assumptions, not empirical estimates of Quebec, Bill 9, any retailer, or any age-assurance vendor.
+Legal facts and contextual evidence are sourced. Most operational numerical parameters remain explicit analyst assumptions or research gaps. Version 0.2 is therefore an **evidence baseline**, not an empirical evaluation of Quebec, Bill 9, a retailer, or a vendor.
 
-## Why this project exists
+## Why the distinction matters
 
-“Age assurance” is an umbrella term for systems that attempt to determine whether a person is above or below an age threshold. It can include:
+Age restrictions are often discussed as though enforcement were binary: verify age, block minors, problem solved. Real systems create interacting effects:
 
-- **Age declaration:** the user states a birth date or checks a box.
-- **Age estimation:** a system infers an age or age range, sometimes from a face image or behavioural data.
-- **Age verification:** a document, database, payment record, or trusted credential is used to establish age.
-- **Reusable age credentials:** a third party verifies someone once and issues a token asserting that the person is over a threshold.
-- **In-person checks:** a clerk inspects identification or a person enrols for later access.
+- some prohibited transactions are prevented;
+- some blocked users circumvent the system;
+- some users substitute another product or channel;
+- some lawful adults are falsely rejected or abandon the transaction;
+- some users face much higher friction than others;
+- identity documents, face images, biometric inferences, and age assertions may be processed or retained;
+- implementation costs differ by retailer size, sales channel, and technical design.
 
-These approaches do not merely differ in strictness. They create different systems of identification, surveillance, exclusion, and institutional power.
+AgeGate Harms makes those trade-offs explicit without collapsing them into a single ethical score.
 
-A system may prevent some prohibited transactions while also:
+## Quebec Bill 9 case study
 
-- rejecting lawful adult users;
-- deterring people who do not want to disclose identity information;
-- disproportionately burdening people without standard government ID;
-- creating identity or biometric records that can be breached or repurposed;
-- shifting transactions to less regulated channels;
-- imposing fixed costs that large firms can absorb more easily than small businesses;
-- producing a false sense that the underlying social or health problem has been solved.
+Quebec's *Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes*, 2026, chapter 11, prohibits covered energy-drink sales to people under 16. When a seller asks for proof, the law specifies government or public-body photo identification showing the buyer's name and date of birth. Most provisions enter into force on December 11, 2026. The provisions for Internet, vending-machine, and other non-co-present sales depend on the first regulation made under section 4.
 
-AgeGate Harms does not assume that age restrictions are inherently illegitimate. It asks a narrower and more empirical question:
+The authoritative legal text is registered in `data/evidence.csv` and summarized in `research/legal/bill-9.md`.
 
-> Given a stated policy goal and a set of assumptions, what does each enforcement design actually do?
+## What changed in v0.2
 
-## Quebec Bill 9 and energy drinks
+### Behavioural outcomes
 
-Quebec's **Bill 9, *Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes***, was introduced on June 5, 2026, adopted on June 11, and sanctioned the same day as **2026, chapter 11**.
+The model now separates:
 
-Most provisions are scheduled to enter into force on **December 11, 2026**. The provisions governing sales without the physical presence of the seller and buyer enter into force when the first regulation under section 4 takes effect.
+- **transactions prevented**, meaning a covered purchase did not occur through the evaluated channel;
+- **substitution events**, meaning the blocked attempt is modeled as shifting to another product or channel;
+- **consumption prevented**, meaning transaction prevention after the modeled substitution adjustment.
 
-The law does several things relevant to age-assurance policy:
+This prevents a blocked checkout from being treated automatically as a health benefit.
 
-1. It prohibits selling an energy drink to a person under 16.
-2. It prohibits selling to an adult when the seller knows the adult is buying for someone under 16.
-3. It prohibits a person under 16 from buying an energy drink or falsely claiming to be 16 or older.
-4. It requires a prospective buyer, when asked, to prove that they are at least 16 using government or public-body photo identification showing their name and date of birth.
-5. It requires the seller to refuse the transaction when the presented document does not adequately establish identity.
-6. It generally prohibits sales without the physical presence of both the seller or employee and the buyer, including Internet and vending-machine sales, subject to future regulatory exceptions and alternative verification rules.
-7. It treats giving an energy drink as equivalent to selling one.
-8. It gives inspectors enforcement powers, including the ability, in defined circumstances, to demand proof of age from a person in or leaving a place where energy drinks are sold.
-9. It creates fines for under-16 purchasers, adults, merchants, and people who obstruct inspectors or investigators.
+### Identity processing
 
-For purposes of the law, an energy drink generally means a beverage containing at least **150 mg of caffeine per litre** plus other ingredients such as taurine, vitamins, or minerals. Coffee, tea, and specified natural health products are excluded unless regulations provide otherwise.
+The model separates routine verification checks from full identity-proofing events. This matters for reusable credentials. A token may be presented on many transactions while full document or biometric proofing happens less frequently.
 
-Official sources:
+The model separately reports:
 
-- [Bill 9 legislative history, National Assembly of Quebec](https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-9-43-3.html)
-- [Sanctioned text, 2026, chapter 11](https://www.publicationsduquebec.gouv.qc.ca/fileadmin/Fichiers_client/lois_et_reglements/LoisAnnuelles/fr/2026/2026C11F.PDF)
-- [Quebec government information on energy drinks](https://www.quebec.ca/en/health/nutrition/healthy-eating-habits/energy-drinks)
-- [Health Canada information on caffeinated energy drinks](https://www.canada.ca/en/health-canada/services/food-nutrition/supplemented-foods/caffeinated-energy-drinks.html)
+- identity-proofing events;
+- retained identity records;
+- centralized records at risk after retention;
+- transient identity images;
+- biometric scans;
+- credential assertions;
+- third-party disclosures.
 
-### Why Bill 9 is a useful case study
+### Breach exposure
 
-The law does not merely create an under-16 sales rule. It creates an age-assurance problem for ordinary retail transactions.
+Routine and catastrophic exposure terms are modeled separately. Both remain transparent stress-test inputs, not breach forecasts.
 
-A policymaker therefore has to choose, explicitly or implicitly, among different enforcement designs:
+### Evidence governance
 
-- Ask only people who appear young for photo ID.
-- Require every customer to present photo ID.
-- Permit online document upload.
-- Use facial age estimation.
-- Create a reusable age token.
-- Require in-person enrolment before online purchases.
-- Prohibit remote and automated sales entirely.
+Every modeled parameter carries one or more evidence identifiers. The evidence registry records whether each item is:
 
-Those choices can produce similar rates of minor-purchase prevention while imposing very different burdens on adults and creating very different quantities of identity data. That is the policy space this simulator is designed to examine.
+- direct empirical evidence;
+- contextual evidence;
+- a legal fact;
+- official guidance;
+- an analyst assumption;
+- an explicit research gap.
 
-## What the simulator models
-
-Version 0.1 compares eight approaches:
-
-1. No verification
-2. Self-declared age
-3. Visual age estimation by staff
-4. Government photo ID inspected without retention
-5. Document upload
-6. Facial age estimation
-7. Reusable third-party age token
-8. In-person enrolment for later online access
-
-For each method, the model estimates outcomes in five categories.
-
-### Access-control outcomes
-
-- Minor purchases prevented
-- Minor purchases completed
-- Adult false rejections
-- Adult transaction abandonment
-- Circumvention
-
-### Privacy and data-processing outcomes
-
-- Verification checks performed
-- Identity records created
-- Expected records exposed through breaches
-- Third-party disclosures
-- Biometric scans
-- Centralized-record exposure
-
-### Distributional outcomes
-
-- Burdens on adults with elevated verification friction
-- False rejections among higher-friction users
-- Abandonment among higher-friction users
-
-The “higher-friction” category is intentionally generic in version 0.1. Future evidence-backed versions should disaggregate relevant groups rather than treating them as interchangeable.
-
-### Economic outcomes
-
-- Variable verification costs
-- Fixed implementation costs
-- Total annual cost
-- Cost per prohibited purchase prevented
-
-### Comparative policy metrics
-
-- Adult adverse outcomes per minor purchase prevented
-- Identity records created per minor purchase prevented
-- Cost per minor purchase prevented
-
-No single metric determines whether a policy is justified. The simulator provides a common accounting framework so that normative disagreements are not disguised as technical inevitabilities.
-
-## Illustrative experiment
-
-The included experiment runs 50,000 Monte Carlo simulations using triangular distributions defined in [`data/assumptions.yaml`](data/assumptions.yaml).
-
-The outputs include:
-
-- deterministic results;
-- median and uncertainty-interval estimates;
-- policy trade-off charts;
-- privacy-footprint comparisons;
-- rank-correlation sensitivity analysis;
-- a self-contained HTML dashboard;
-- a machine-readable run manifest.
-
-The current results should be read as a demonstration of the framework, not as a forecast. The most important output of version 0.1 is the evidence roadmap: it shows which uncertain variables have the greatest effect on each policy conclusion.
-
-![Illustrative trade-off chart](results/tradeoff.png)
-
-![Illustrative privacy-footprint chart](results/privacy_footprint.png)
+The model does not treat contextual evidence as a direct estimate.
 
 ## Quick start
 
 ### Requirements
 
 - Python 3.11 or newer
-- [`uv`](https://docs.astral.sh/uv/)
+- `uv`
 
-### Install and run
+### Install and run from fish on Arch Linux
 
-```bash
-uv sync --extra dev
-uv run agegate-run --simulations 50000 --seed 20260722
-uv run pytest
+```fish
+sudo pacman -S --needed fish git python uv
+fish run_experiment.fish
 ```
 
-Results are written to `results/`.
+`run_experiment.fish` is a native fish implementation. It does not delegate to Bash. It syntax-checks the fish entry points, synchronizes development and Streamlit dependencies, validates evidence mappings, runs tests and Ruff, executes the 50,000-draw experiment, and exports the parameter catalog.
 
-Open the static dashboard:
+A custom run from fish:
+
+```fish
+fish run_experiment.fish --simulations 50000 --seed 20260722
+```
+
+The Bash runner remains available as an optional compatibility path for non-fish environments:
 
 ```bash
+./run_experiment.sh
+```
+
+Open the static dashboard or interactive interface from fish:
+
+```fish
 xdg-open results/dashboard.html
-```
-
-### Interactive Streamlit interface
-
-```bash
-uv sync --extra ui
 uv run streamlit run app.py
 ```
 
-## Editing the scenario
+See `MOMIJI.md` for installation and `PUBLISHING.md` for the reviewed GitHub release workflow.
 
-The main assumptions are stored in:
+## Main outputs
 
-```text
-data/assumptions.yaml
-```
-
-Each uncertain parameter can be represented as a triangular distribution:
-
-```yaml
-adult_false_rejection_rate:
-  low: 0.008
-  mode: 0.025
-  high: 0.065
-```
-
-The evidence registry is stored in:
+The experiment writes:
 
 ```text
-data/evidence.csv
+results/
+├── REPORT.md
+├── dashboard.html
+├── deterministic_results.csv
+├── monte_carlo_summary.csv
+├── sensitivity.csv
+├── evidence_coverage.csv
+├── evidence_priorities.csv
+├── tradeoff.png
+├── privacy_footprint.png
+├── substitution.png
+├── evidence_priorities.png
+└── run_manifest.json
 ```
 
-A future evidence-backed release should record, for every major parameter:
+## Evidence-first workflow
 
-- the source;
-- jurisdiction and population;
-- measurement date;
-- central estimate and plausible range;
-- whether the value is empirical, modelled, vendor-supplied, or expert judgment;
-- known limitations and conflicts of interest.
+1. Register a source in `data/evidence.csv`.
+2. Record its population, jurisdiction, date, estimate, uncertainty, independence, limitations, and relationship to the model parameter.
+3. Attach its `evidence_id` to the relevant YAML parameter.
+4. Run `agegate-evidence`.
+5. Run the simulation and inspect `results/evidence_priorities.csv`.
+6. Research the highest-sensitivity parameters with the weakest direct evidence first.
+7. Preserve conflicting studies rather than averaging incompatible results automatically.
+8. Update assumptions only through a documented change with a citation and rationale.
 
-## Project structure
+## Research files
 
 ```text
-agegate-harms/
-├── app.py
-├── data/
-│   ├── assumptions.yaml
-│   └── evidence.csv
-├── docs/
-│   └── methodology.md
-├── results/
-│   ├── dashboard.html
-│   ├── deterministic_results.csv
-│   ├── monte_carlo_summary.csv
-│   ├── sensitivity.csv
-│   ├── tradeoff.png
-│   └── privacy_footprint.png
-├── src/agegate_harms/
-│   ├── cli.py
-│   ├── model.py
-│   └── reporting.py
-├── tests/
-│   └── test_model.py
-├── pyproject.toml
-└── run_experiment.sh
+research/
+├── legal/
+│   ├── bill-9.md
+│   └── regulations-watch.md
+├── notes/
+│   ├── abandonment.md
+│   ├── accessibility.md
+│   ├── circumvention.md
+│   ├── data-flows.md
+│   ├── false-rejection.md
+│   ├── id-access.md
+│   ├── retailer-costs.md
+│   ├── sensitivity-plan.md
+│   └── substitution.md
+├── interviews/
+│   ├── consent-script.md
+│   ├── interview-protocol.md
+│   ├── note-template.md
+│   └── stakeholder-matrix.csv
+└── sources/
+    ├── README.md
+    └── bibliography.bib
 ```
+
+## Distributional research
+
+`data/distributional_groups.csv` lists candidate groups and mechanisms to study. These groups are not assigned numerical multipliers merely because a burden is plausible. Disaggregation should occur only when direct evidence, participatory review, or a clearly labeled scenario assumption supports it.
+
+## Regulatory monitoring
+
+The remote-sales design is not settled in the sanctioned statute. The watcher records hashes of authoritative source pages and flags changes for human review:
+
+```fish
+python scripts/watch_regulations.py --initialize
+uv run python scripts/watch_regulations.py
+```
+
+A hash change is not legal interpretation. It is a prompt to review the official text and update `research/legal/regulations-watch.md`.
+
+## GitHub research backlog
+
+The repository includes issue templates and a scripted backlog. After authenticating `gh` with write access:
+
+```fish
+python scripts/create_research_issues.py --dry-run
+fish scripts/create_research_issues.fish
+```
+
+The script is idempotent by title and creates only missing issues.
 
 ## Methodological principles
 
-### 1. Separate evidence from assumptions
-
-A number appearing in a YAML file does not become evidence merely because Python can calculate with it. Version 0.1 labels all numerical inputs as illustrative.
-
-### 2. Report uncertainty
-
-Policy models should not convert weak inputs into falsely precise outputs. The Monte Carlo analysis reports distributions and intervals rather than relying only on point estimates.
-
-### 3. Preserve competing values
-
-Preventing prohibited purchases, preserving lawful adult access, minimizing data collection, reducing inequitable errors, and controlling costs are distinct objectives. The project does not collapse them into a single “ethical score.”
-
-### 4. Model behavioural responses
-
-People may abandon a transaction, ask someone else to buy, cross a jurisdictional boundary, switch products, or use an unregulated channel. A system's nominal detection accuracy is not the same as its real-world effectiveness.
-
-### 5. Do not treat privacy as a slogan
-
-“Privacy-preserving” is not a binary label. Relevant questions include what is collected, who receives it, whether it is retained, whether transactions can be linked, what happens after a breach, and whether the infrastructure can be reused for another purpose.
+1. **Separate evidence from assumptions.** A number does not become evidence because software can calculate with it.
+2. **Report uncertainty.** Weak inputs should not produce falsely precise conclusions.
+3. **Preserve competing values.** Prevention, lawful access, privacy, accessibility, equity, and cost are distinct objectives.
+4. **Model behavioural response.** Detection accuracy is not real-world effectiveness.
+5. **Distinguish transient processing from retention.** A system can create privacy risk without storing a permanent image.
+6. **Distinguish repeated checks from identity proofing.** Reusable credentials change the data and cost architecture.
+7. **Do not infer health benefits from blocked transactions.** Consumption, substitution, dose, and health outcomes require separate evidence.
+8. **Keep legal status dated.** Regulations and guidance can change.
 
 ## What the project does not claim
 
-AgeGate Harms does **not**:
+AgeGate Harms does not:
 
-- claim that energy drinks are harmless;
 - determine whether an age restriction is constitutionally valid;
-- provide legal or medical advice;
+- provide legal, medical, regulatory, or security advice;
 - estimate the health benefit of Bill 9;
-- validate any commercial age-assurance vendor;
-- assume that every identity check stores a copy of an ID;
-- assume that every biometric system retains a face image;
-- prove that one verification method is universally best;
+- validate a commercial age-assurance vendor;
+- assume every identity check stores an ID;
+- assume every biometric process retains a face image;
+- prove one verification method is universally best;
+- treat contextual evidence as a direct parameter estimate;
 - treat illustrative results as measured facts.
-
-Health-risk assessment, constitutional analysis, enforcement design, and age-assurance impact modelling are related but separate research tasks.
-
-## Research roadmap
-
-Priority work for an evidence-backed Quebec release includes:
-
-1. Estimate the number and type of affected transactions.
-2. Measure how often sellers would request identification under realistic policies.
-3. Find empirical false-rejection and abandonment rates.
-4. Study access barriers for adults without conventional photo ID.
-5. Document the data flows of proposed online verification methods.
-6. Estimate circumvention, substitution, and cross-border purchasing.
-7. Model retailer costs by business size and sales channel.
-8. Distinguish transient inspection from scanning, storage, and third-party verification.
-9. Add explicit health-benefit scenarios without embedding one disputed estimate as fact.
-10. Update the simulator when Quebec adopts regulations under section 4.
 
 ## Contributing
 
-Contributions are welcome, especially:
+See `CONTRIBUTING.md`. Contributions should distinguish code changes, empirical claims, legal facts, normative arguments, and analyst assumptions.
 
-- empirical evidence and source review;
-- additional policy scenarios;
-- accessibility and distributional-impact research;
-- privacy threat models;
-- test coverage;
-- bilingual English and French documentation;
-- reproducibility improvements.
+## Publishing v0.2.0
 
-Please distinguish clearly between code changes, empirical claims, normative arguments, and illustrative assumptions.
+Run the non-publishing release validation first:
 
-## Independence and disclaimer
+```fish
+fish scripts/release_preflight.fish
+```
 
-This is an independent research prototype. Unless an organization expressly adopts or publishes it, the repository should not be interpreted as an official statement by an employer, client, government body, or advocacy organization.
-
-The project is provided for research and educational purposes. It is not legal, medical, or regulatory advice.
+Then follow `PUBLISHING.md` for the reviewed branch, draft pull request, tag, and GitHub release workflow.
 
 ## License
 
-The software in this repository is released under the [MIT License](LICENSE).
-
-Research reports, written analysis, datasets, and third-party materials may be subject to separate attribution or licensing requirements where indicated.
+The software is released under the MIT License. Research reports, datasets, and third-party materials may require separate attribution where indicated.

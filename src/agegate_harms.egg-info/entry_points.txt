@@ -1,2 +1,3 @@
 [console_scripts]
+agegate-evidence = agegate_harms.evidence:main
 agegate-run = agegate_harms.cli:main
